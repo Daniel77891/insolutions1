@@ -536,5 +536,147 @@ body {
 <script src="js/supabase.js"></script>
 <script src="js/kontakt.js"></script>
 
+
+<script>
+    
+document.addEventListener("DOMContentLoaded", () => {
+
+    // =====================================
+    // USTAWIENIA ANIMACJI
+    // =====================================
+
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) return;
+
+
+    // =====================================
+    // ANIMACJE SEKCJI
+    // =====================================
+
+    const revealElements = document.querySelectorAll(
+        ".sekcja-naglowek, " +
+        ".informacja, " +
+        ".produkt, " +
+        ".korzysc, " +
+        ".kontakt"
+    );
+
+    // Dodajemy klasę animacji
+    revealElements.forEach(element => {
+        element.classList.add("scroll-reveal");
+    });
+
+
+    // =====================================
+    // ANIMACJE ZDJĘĆ
+    // =====================================
+
+    const images = document.querySelectorAll(
+        ".sekcja-obraz img, .produkt img"
+    );
+
+    images.forEach(image => {
+        image.classList.add("image-reveal");
+    });
+
+
+    // =====================================
+    // OBSERWATOR SCROLLOWANIA
+    // =====================================
+
+    if ("IntersectionObserver" in window) {
+
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: "0px 0px -35px 0px"
+            }
+        );
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        images.forEach(image => {
+            observer.observe(image);
+        });
+
+    } else {
+
+        revealElements.forEach(element => {
+            element.classList.add("visible");
+        });
+
+        images.forEach(image => {
+            image.classList.add("visible");
+        });
+
+    }
+
+
+    // =====================================
+    // OPÓŹNIENIE KART
+    // =====================================
+
+    const containers = document.querySelectorAll(
+        ".informacje, .produkty, .korzysci-grid"
+    );
+
+    containers.forEach(container => {
+
+        Array.from(container.children).forEach((card, index) => {
+
+            card.style.setProperty(
+                "--delay",
+                `${index * 150}ms`
+            );
+
+        });
+
+    });
+
+
+    // =====================================
+    // MENU
+    // =====================================
+
+    const menu = document.querySelector(".menu");
+
+    if (menu) {
+        menu.classList.add("menu-visible");
+    }
+
+
+    // =====================================
+    // NAGŁÓWEK
+    // =====================================
+
+    const naglowek = document.querySelector(".naglowek");
+
+    if (naglowek) {
+        naglowek.classList.add("header-visible");
+    }
+
+});
+
+</script>
 </body>
 </html>

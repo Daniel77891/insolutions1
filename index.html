@@ -9,97 +9,58 @@
     <title>inSolutions – Rozwiązania dla Subiekta nexo PRO</title>
 
     <link rel="stylesheet" href="nexo.css">
+
+    <meta name="theme-color" content="#17345b">
 </head>
 
 <body>
 
-<style>
-#cookie-banner {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 30px);
-    max-width: 650px;
-    background: #17345b;
-    color: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
-    z-index: 99999;
-    font-family: Arial, sans-serif;
-    display: none;
-}
+<div id="cookie-banner">
+    <h3>🍪 Pliki cookies</h3>
+    <p>
+        Nasza strona wykorzystuje pliki cookies.
+        Możesz zaakceptować wszystkie lub dostosować swoje ustawienia.
+    </p>
 
-#cookie-banner h3 {
-    color: white;
-    margin-top: 0;
-}
+    <button onclick="acceptAll()">Akceptuję wszystkie</button>
+    <button onclick="rejectAll()">Odrzucam opcjonalne</button>
+    <button onclick="openSettings()">Ustawienia</button>
+</div>
 
-#cookie-banner p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #dce7f3;
-}
+<div id="cookie-settings">
+    <div class="cookie-box">
+        <h2>Ustawienia cookies</h2>
 
-#cookie-banner a {
-    color: #8ac7ff;
-}
+        <p>
+            <input type="checkbox" checked disabled>
+            Niezbędne
+        </p>
 
-.cookie-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-}
+        <p>
+            <input type="checkbox" id="analytics">
+            Analityczne
+        </p>
 
-.cookie-buttons button {
-    flex: 1;
-    min-width: 130px;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 13px;
-    margin: 0;
-}
+        <p>
+            <input type="checkbox" id="marketing">
+            Marketingowe
+        </p>
 
-.cookie-accept {
-    background: #4d9e39;
-    color: white;
-}
+        <button onclick="saveSettings()">Zapisz ustawienia</button>
+        <button onclick="closeSettings()">Anuluj</button>
+    </div>
+</div>
 
-.cookie-reject {
-    background: white;
-    color: #17345b;
-}
-
-.cookie-save {
-    background: #2878bd;
-    color: white;
-}
-
-
-</style>
-
-
-
- 
-
-
+<button id="cookie-reopen" onclick="openSettings()">
+    Ustawienia cookies
+</button>
 
 <header>
-    <script>
-        if (prompt("Podaj hasło:") !== "praktyki") {
-  alert("Nieprawidłowe hasło!");
-  location.reload();
-}
-    </script>
 
     <div class="menu">
+
         <a href="index.html">
-            <img src="logo.svg" alt="inSolutions" title="insolutions">
+            <img src="logo.svg" alt="inSolutions" title="inSolutions">
         </a>
 
         <nav>
@@ -108,8 +69,19 @@
             <a href="wdrozenia.html">WDROŻENIA</a>
             <a href="https://www.insklep.pl/">INSKLEP</a>
             <a href="kalkulator.html">KALKULATOR</a>
-     
+            
+
+<div class="language-switcher">
+    <button onclick="changeLanguage('pl')">PL 🇵🇱</button>
+    <button onclick="changeLanguage('en')">EN 🇬🇧</button>
+    <button onclick="changeLanguage('de')">DE 🇩🇪</button>
+</div>
+
+<div id="google_translate_element"></div>
+
+
         </nav>
+
     </div>
 
     <div class="naglowek">
@@ -137,7 +109,12 @@
     </div>
 
 </header>
-
+    <script>
+        if (prompt("Podaj hasło:") !== "praktyki") {
+  alert("Nieprawidłowe hasło!");
+  location.reload();
+}
+    </script>
 <main>
 
     <section>
@@ -146,7 +123,13 @@
             <h2>Technologia wspierająca rozwój Twojej firmy</h2>
 
             <p>
-              Naszym celem jest dostarczanie rozwiązań, które pomagają przedsiębiorstwom lepiej wykorzystywać potencjał nowoczesnych technologii. Wspieramy firmy w cyfryzacji procesów biznesowych, integracji wykorzystywanych systemów oraz dostosowywaniu oprogramowania do zmieniających się potrzeb rynku.
+                Naszym celem jest dostarczanie rozwiązań,
+                które pomagają przedsiębiorstwom lepiej
+                wykorzystywać potencjał nowoczesnych technologii.
+                Wspieramy firmy w cyfryzacji procesów biznesowych,
+                integracji wykorzystywanych systemów oraz
+                dostosowywaniu oprogramowania do zmieniających
+                się potrzeb rynku.
             </p>
         </div>
 
@@ -154,33 +137,51 @@
 
             <div class="informacja">
                 <h3>Doświadczenie</h3>
-                <p>InSolutions to doświadczenie, wiedza i praktyczne podejście do technologii. Od 2005 roku tworzymy i wdrażamy rozwiązania informatyczne, które odpowiadają na realne potrzeby biznesu. Łączymy znajomość technologii z rozumieniem procesów zachodzących w przedsiębiorstwach, dostarczając rozwiązania wspierające ich rozwój i codzienną działalność.</p>
+                <p>
+                    InSolutions to doświadczenie, wiedza i praktyczne
+                    podejście do technologii. Od 2005 roku tworzymy
+                    i wdrażamy rozwiązania informatyczne, które
+                    odpowiadają na realne potrzeby biznesu.
+                </p>
             </div>
 
             <div class="informacja">
                 <h3>Oprogramowanie</h3>
-                <p>Projektujemy i rozwijamy własne produkty oraz dedykowane oprogramowanie. Stawiamy na funkcjonalność, elastyczność i niezawodność, tworząc narzędzia, które usprawniają pracę, automatyzują procesy i pomagają firmom osiągać lepsze rezultaty. Nasze rozwiązania rozwijamy z myślą o długoterminowej użyteczności i zmieniających się potrzebach klientów.</p>
+                <p>
+                    Projektujemy i rozwijamy własne produkty oraz
+                    dedykowane oprogramowanie. Stawiamy na
+                    funkcjonalność, elastyczność i niezawodność.
+                </p>
             </div>
 
             <div class="informacja">
                 <h3>Integracje</h3>
-                <p>Specjalizujemy się w integracji systemów informatycznych i zapewnianiu sprawnej wymiany danych pomiędzy różnymi aplikacjami i platformami. Tworzymy rozwiązania, które eliminują bariery technologiczne, ograniczają powtarzalność pracy i pozwalają efektywniej wykorzystywać posiadane narzędzia. Dzięki integracjom wszystkie kluczowe systemy mogą działać jako spójna całość.</p>
+                <p>
+                    Specjalizujemy się w integracji systemów
+                    informatycznych i zapewnianiu sprawnej wymiany
+                    danych pomiędzy różnymi aplikacjami i platformami.
+                </p>
             </div>
 
             <div class="informacja">
                 <h3>Wsparcie</h3>
-                <p>Oferujemy profesjonalne doradztwo, konsultacje, wdrożenia oraz wsparcie techniczne. Pomagamy dobrać odpowiednie rozwiązania, przeprowadzamy przez proces ich uruchomienia i zapewniamy pomoc w dalszym użytkowaniu. Stawiamy na partnerską współpracę, szybką reakcję i długofalowe relacje, ponieważ wiemy, że technologia powinna przede wszystkim ułatwiać prowadzenie biznesu.</p>
+                <p>
+                    Oferujemy profesjonalne doradztwo, konsultacje,
+                    wdrożenia oraz wsparcie techniczne.
+                </p>
             </div>
 
         </div>
 
     </section>
 
+    <!-- SUBIEKT NEXO PRO -->
+
     <section class="sekcja-obraz">
 
         <img src="subiekt.jpg"
              alt="System sprzedaży Subiekt nexo PRO"
-             title="System sprzedaż">
+             title="System sprzedaży">
 
         <div>
 
@@ -204,43 +205,82 @@
                 system do indywidualnych potrzeb przedsiębiorstwa.
             </p>
 
+            <p>
+                Subiekt nexo PRO może stanowić centralny element
+                środowiska informatycznego przedsiębiorstwa.
+                Dzięki możliwości współpracy z dodatkowymi
+                aplikacjami i narzędziami można rozbudować jego
+                funkcjonalność o kolejne obszary działalności firmy.
+            </p>
+
+            <p>
+                Integracja z rozwiązaniami zewnętrznymi pozwala
+                usprawnić wymianę danych, uporządkować obsługę
+                zamówień oraz zapewnić lepszy przepływ informacji
+                pomiędzy poszczególnymi działami przedsiębiorstwa.
+            </p>
+
             <a href=""
                class="przycisk przycisk-niebieski">
                 POZNAJ SUBIEKTA NEXO PRO
-                Subiekt nexo PRO może stanowić centralny element środowiska informatycznego przedsiębiorstwa. Dzięki możliwości współpracy z dodatkowymi aplikacjami i narzędziami można rozbudować jego funkcjonalność o kolejne obszary działalności firmy.
-
-Integracja z rozwiązaniami zewnętrznymi pozwala usprawnić wymianę danych, uporządkować obsługę zamówień oraz zapewnić lepszy przepływ informacji pomiędzy poszczególnymi działami przedsiębiorstwa.
             </a>
 
         </div>
 
     </section>
 
+
+    <!-- NASZE ROZWIĄZANIA -->
+
     <section>
 
         <div class="sekcja-naglowek">
+
             <h2>Nasze rozwiązania</h2>
 
             <p>
                 Rozwiązania wspierające sprzedaż, logistykę,
                 obsługę klientów i zarządzanie przedsiębiorstwem.
             </p>
+
         </div>
+
 
         <div class="produkty">
 
+
+            <!-- INTRADUS -->
+
             <article class="produkt">
 
-                <img src="intradus.png" alt="inTradus " title="intradus">
+                <img src="intradus.png"
+                     alt="inTradus"
+                     title="inTradus">
 
                 <div class="produkt-tresc">
 
                     <h3>inTradus</h3>
 
                     <p>
-                      inTradus to platforma sprzedażowa umożliwiająca prowadzenie nowoczesnej sprzedaży internetowej zintegrowanej z systemem ERP. Rozwiązanie pozwala na automatyczną wymianę danych pomiędzy sklepem internetowym a systemem zarządzania firmą. Dzięki temu informacje o produktach, cenach, stanach magazynowych i zamówieniach mogą być aktualizowane bez konieczności ręcznego wprowadzania danych.
+                        inTradus to platforma sprzedażowa
+                        umożliwiająca prowadzenie nowoczesnej
+                        sprzedaży internetowej zintegrowanej
+                        z systemem ERP.
 
-Platforma wspiera obsługę sprzedaży B2B i B2C, a także umożliwia rozwijanie działalności w różnych kanałach sprzedaży. To rozwiązanie dla firm, które chcą usprawnić obsługę zamówień, ograniczyć powtarzalne czynności i rozwijać sprzedaż online.
+                        Rozwiązanie pozwala na automatyczną
+                        wymianę danych pomiędzy sklepem
+                        internetowym a systemem zarządzania firmą.
+                        Dzięki temu informacje o produktach,
+                        cenach, stanach magazynowych i zamówieniach
+                        mogą być aktualizowane bez konieczności
+                        ręcznego wprowadzania danych.
+
+                        Platforma wspiera obsługę sprzedaży B2B
+                        i B2C, a także umożliwia rozwijanie
+                        działalności w różnych kanałach sprzedaży.
+                        To rozwiązanie dla firm, które chcą
+                        usprawnić obsługę zamówień, ograniczyć
+                        powtarzalne czynności i rozwijać sprzedaż online.
                     </p>
 
                     <a href="https://www.insolutions.pl/pl/page/intradus">
@@ -251,20 +291,37 @@ Platforma wspiera obsługę sprzedaży B2B i B2C, a także umożliwia rozwijanie
 
             </article>
 
+
+            <!-- INWMS -->
+
             <article class="produkt">
 
-                <img src="inwms.jpg" alt="inWMS" title="inwms">
+                <img src="inwms.jpg"
+                     alt="inWMS"
+                     title="inWMS">
 
                 <div class="produkt-tresc">
 
                     <h3>inWMS</h3>
 
                     <p>
-                       inWMS to nowoczesny system wspierający zarządzanie procesami magazynowymi. Umożliwia kontrolowanie przyjęć towarów, przemieszczania produktów wewnątrz magazynu oraz realizacji wydań.
+                        inWMS to nowoczesny system wspierający
+                        zarządzanie procesami magazynowymi.
+                        Umożliwia kontrolowanie przyjęć towarów,
+                        przemieszczania produktów wewnątrz
+                        magazynu oraz realizacji wydań.
 
-Dzięki integracji z systemami ERP przedsiębiorstwo może korzystać ze spójnych informacji dotyczących stanów magazynowych i wykonywanych operacji. System pomaga usprawnić organizację pracy, ograniczyć pomyłki oraz zwiększyć kontrolę nad przepływem towarów.
+                        Dzięki integracji z systemami ERP
+                        przedsiębiorstwo może korzystać ze
+                        spójnych informacji dotyczących stanów
+                        magazynowych i wykonywanych operacji.
+                        System pomaga usprawnić organizację pracy,
+                        ograniczyć pomyłki oraz zwiększyć kontrolę
+                        nad przepływem towarów.
 
-Rozwiązanie sprawdzi się w firmach, które chcą uporządkować procesy magazynowe i lepiej wykorzystywać dostępne zasoby.
+                        Rozwiązanie sprawdzi się w firmach,
+                        które chcą uporządkować procesy magazynowe
+                        i lepiej wykorzystywać dostępne zasoby.
                     </p>
 
                     <a href="https://www.insolutions.pl/pl/page/inwms">
@@ -275,20 +332,44 @@ Rozwiązanie sprawdzi się w firmach, które chcą uporządkować procesy magazy
 
             </article>
 
+
+            <!-- INMOBILUS -->
+
             <article class="produkt">
 
-                <img src="inmobilus.jpg" alt="inMobilus" title="inmobilus">
+                <img src="inmobilus.jpg"
+                     alt="inMobilus"
+                     title="inMobilus">
 
                 <div class="produkt-tresc">
 
                     <h3>inMobilus</h3>
 
                     <p>
-                      Inmobilus to rozwiązanie stworzone z myślą o usprawnieniu codziennej pracy przedsiębiorstw. Wspiera organizację procesów, ułatwia zarządzanie informacjami i pomaga lepiej kontrolować wykonywane zadania. Dzięki wykorzystaniu nowoczesnych narzędzi możliwe jest ograniczenie liczby powtarzalnych czynności oraz zwiększenie efektywności pracy.
+                        inMobilus to rozwiązanie stworzone
+                        z myślą o usprawnieniu codziennej pracy
+                        przedsiębiorstw. Wspiera organizację
+                        procesów, ułatwia zarządzanie informacjami
+                        i pomaga lepiej kontrolować wykonywane zadania.
 
-Systemy i rozwiązania informatyczne odgrywają coraz większą rolę w funkcjonowaniu współczesnych firm. Dlatego ważne jest korzystanie z narzędzi, które pozwalają szybko reagować na zmieniające się potrzeby i zapewniają wygodny dostęp do najważniejszych informacji.
+                        Dzięki wykorzystaniu nowoczesnych narzędzi
+                        możliwe jest ograniczenie liczby powtarzalnych
+                        czynności oraz zwiększenie efektywności pracy.
 
-Inmobilus pomaga uporządkować codzienne działania i wspiera pracowników w realizacji obowiązków. To rozwiązanie, które może przyczynić się do lepszej organizacji pracy, oszczędności czasu oraz sprawniejszego przepływu informacji w przedsiębiorstwie.
+                        Systemy i rozwiązania informatyczne odgrywają
+                        coraz większą rolę w funkcjonowaniu
+                        współczesnych firm. Dlatego ważne jest
+                        korzystanie z narzędzi, które pozwalają
+                        szybko reagować na zmieniające się potrzeby
+                        i zapewniają wygodny dostęp do najważniejszych
+                        informacji.
+
+                        InMobilus pomaga uporządkować codzienne
+                        działania i wspiera pracowników w realizacji
+                        obowiązków. To rozwiązanie, które może
+                        przyczynić się do lepszej organizacji pracy,
+                        oszczędności czasu oraz sprawniejszego
+                        przepływu informacji w przedsiębiorstwie.
                     </p>
 
                     <a href="https://www.insolutions.pl/pl/inmobilus/o-aplikacji">
@@ -299,20 +380,37 @@ Inmobilus pomaga uporządkować codzienne działania i wspiera pracowników w re
 
             </article>
 
+
+            <!-- INPOS -->
+
             <article class="produkt">
 
-                <img src="inpos.jpg" alt="inPOS" title="inpos">
+                <img src="inpos.jpg"
+                     alt="inPOS"
+                     title="inPOS">
 
                 <div class="produkt-tresc">
 
                     <h3>inPOS</h3>
 
                     <p>
-                      inPOS to rozwiązanie przeznaczone dla sieci handlowych i gastronomicznych. Oprogramowanie wspiera obsługę sprzedaży przy wykorzystaniu stanowisk POS, ułatwiając codzienną pracę personelu oraz obsługę klientów.
+                        inPOS to rozwiązanie przeznaczone
+                        dla sieci handlowych i gastronomicznych.
+                        Oprogramowanie wspiera obsługę sprzedaży
+                        przy wykorzystaniu stanowisk POS,
+                        ułatwiając codzienną pracę personelu
+                        oraz obsługę klientów.
 
-System może współpracować z urządzeniami peryferyjnymi i systemem ERP, dzięki czemu informacje dotyczące sprzedaży mogą być sprawnie przekazywane pomiędzy poszczególnymi obszarami działalności firmy.
+                        System może współpracować z urządzeniami
+                        peryferyjnymi i systemem ERP, dzięki czemu
+                        informacje dotyczące sprzedaży mogą być
+                        sprawnie przekazywane pomiędzy
+                        poszczególnymi obszarami działalności firmy.
 
-inPOS pomaga uporządkować proces sprzedaży, usprawnić obsługę transakcji oraz zapewnić większą kontrolę nad funkcjonowaniem punktów handlowych.
+                        inPOS pomaga uporządkować proces sprzedaży,
+                        usprawnić obsługę transakcji oraz zapewnić
+                        większą kontrolę nad funkcjonowaniem
+                        punktów handlowych.
                     </p>
 
                     <a href="https://www.insolutions.pl/pl/page/inpos">
@@ -323,9 +421,12 @@ inPOS pomaga uporządkować proces sprzedaży, usprawnić obsługę transakcji o
 
             </article>
 
+
         </div>
 
     </section>
+
+    <!-- ROZWIĄZANIA DOPASOWANE DO POTRZEB -->
 
     <section class="sekcja-obraz">
 
@@ -334,27 +435,44 @@ inPOS pomaga uporządkować proces sprzedaży, usprawnić obsługę transakcji o
             <h2>Rozwiązania dopasowane do potrzeb</h2>
 
             <p>
-                Każde przedsiębiorstwo działa w inny sposób i mierzy się z różnymi wyzwaniami. Dlatego nie stosujemy jednego rozwiązania dla wszystkich. Najważniejsze jest dla nas poznanie potrzeb klienta, zrozumienie specyfiki jego działalności i dobranie odpowiednich narzędzi.
+                Każde przedsiębiorstwo działa w inny sposób
+                i mierzy się z różnymi wyzwaniami. Dlatego
+                nie stosujemy jednego rozwiązania dla wszystkich.
+                Najważniejsze jest dla nas poznanie potrzeb klienta,
+                zrozumienie specyfiki jego działalności i dobranie
+                odpowiednich narzędzi.
 
-Przed zaproponowaniem rozwiązania istotne jest przeanalizowanie obecnych procesów w firmie. Pozwala to określić, które obszary wymagają usprawnienia i jakie technologie mogą przynieść najlepsze rezultaty.
+                Przed zaproponowaniem rozwiązania istotne jest
+                przeanalizowanie obecnych procesów w firmie.
+                Pozwala to określić, które obszary wymagają
+                usprawnienia i jakie technologie mogą przynieść
+                najlepsze rezultaty.
 
-Naszym celem jest dostarczanie rozwiązań, które nie tylko odpowiadają na aktualne potrzeby, ale również umożliwiają dalszy rozwój przedsiębiorstwa. Zwracamy uwagę na wygodę użytkowania, funkcjonalność oraz możliwość dostosowania systemów do zmieniających się warunków.
+                Naszym celem jest dostarczanie rozwiązań,
+                które nie tylko odpowiadają na aktualne potrzeby,
+                ale również umożliwiają dalszy rozwój przedsiębiorstwa.
+                Zwracamy uwagę na wygodę użytkowania,
+                funkcjonalność oraz możliwość dostosowania
+                systemów do zmieniających się warunków.
+            </p>
 
-W ramach współpracy skupiamy się na:
+            <p>
+                W ramach współpracy skupiamy się na:
+            </p>
 
-poznaniu oczekiwań i potrzeb klienta,
+            <ul>
+                <li>poznaniu oczekiwań i potrzeb klienta,</li>
+                <li>analizie procesów zachodzących w przedsiębiorstwie,</li>
+                <li>wyborze odpowiednich rozwiązań informatycznych,</li>
+                <li>dopasowaniu funkcjonalności do specyfiki firmy,</li>
+                <li>usprawnieniu codziennych obowiązków pracowników,</li>
+                <li>zapewnieniu możliwości dalszego rozwoju wykorzystywanych systemów.</li>
+            </ul>
 
-analizie procesów zachodzących w przedsiębiorstwie,
-
-wyborze odpowiednich rozwiązań informatycznych,
-
-dopasowaniu funkcjonalności do specyfiki firmy,
-
-usprawnieniu codziennych obowiązków pracowników,
-
-zapewnieniu możliwości dalszego rozwoju wykorzystywanych systemów.
-
-Dobrze dobrane rozwiązania pozwalają firmom pracować sprawniej, ograniczać niepotrzebne koszty i lepiej wykorzystywać dostępne zasoby.
+            <p>
+                Dobrze dobrane rozwiązania pozwalają firmom
+                pracować sprawniej, ograniczać niepotrzebne koszty
+                i lepiej wykorzystywać dostępne zasoby.
             </p>
 
             <a href="oferta.html" class="przycisk">
@@ -365,55 +483,125 @@ Dobrze dobrane rozwiązania pozwalają firmom pracować sprawniej, ograniczać n
 
         <img src="system.jpg"
              alt="Integracja systemów informatycznych"
-             title="system">
+             title="Systemy informatyczne">
 
     </section>
+
+
+    <!-- DLACZEGO WARTO Z NAMI WSPÓŁPRACOWAĆ -->
 
     <section class="korzysci">
 
         <div class="sekcja-naglowek">
+
             <h2>Dlaczego warto z nami współpracować?</h2>
 
             <p>
-               Łączymy wieloletnie doświadczenie, wiedzę technologiczną i praktyczne podejście do biznesu. Nie proponujemy przypadkowych rozwiązań – skupiamy się na rzeczywistych potrzebach naszych klientów, pomagając im usprawniać procesy, integrować systemy i efektywnie wykorzystywać możliwości nowoczesnych technologii. Zapewniamy partnerską współpracę oraz wsparcie na każdym etapie realizacji projektu.
+                Łączymy wieloletnie doświadczenie,
+                wiedzę technologiczną i praktyczne podejście
+                do biznesu. Nie proponujemy przypadkowych
+                rozwiązań – skupiamy się na rzeczywistych
+                potrzebach naszych klientów, pomagając im
+                usprawniać procesy, integrować systemy
+                i efektywnie wykorzystywać możliwości
+                nowoczesnych technologii.
+
+                Zapewniamy partnerską współpracę oraz wsparcie
+                na każdym etapie realizacji projektu.
             </p>
+
         </div>
+
 
         <div class="korzysci-grid">
 
+
             <div class="korzysc">
+
                 <h3>Doświadczenie</h3>
+
                 <p>
-                  Działamy na rynku od 2005 roku, zdobywając doświadczenie w tworzeniu oprogramowania, integracji systemów i obsłudze rozwiązań informatycznych. Znamy wyzwania, z jakimi mierzą się przedsiębiorstwa, dlatego potrafimy proponować sprawdzone i skuteczne rozwiązania.
+                    Działamy na rynku od 2005 roku,
+                    zdobywając doświadczenie w tworzeniu
+                    oprogramowania, integracji systemów
+                    i obsłudze rozwiązań informatycznych.
+
+                    Znamy wyzwania, z jakimi mierzą się
+                    przedsiębiorstwa, dlatego potrafimy
+                    proponować sprawdzone i skuteczne rozwiązania.
                 </p>
+
             </div>
 
+
             <div class="korzysc">
+
                 <h3>Indywidualne podejście</h3>
+
                 <p>
-                   Każda firma ma swoją specyfikę, potrzeby i sposób działania. Dlatego dokładnie analizujemy oczekiwania klientów i dobieramy rozwiązania odpowiadające ich wymaganiom. Stawiamy na elastyczność, funkcjonalność i realne korzyści biznesowe.
+                    Każda firma ma swoją specyfikę,
+                    potrzeby i sposób działania.
+
+                    Dlatego dokładnie analizujemy oczekiwania
+                    klientów i dobieramy rozwiązania
+                    odpowiadające ich wymaganiom.
+
+                    Stawiamy na elastyczność, funkcjonalność
+                    i realne korzyści biznesowe.
                 </p>
+
             </div>
 
+
             <div class="korzysc">
+
                 <h3>Integracje</h3>
+
                 <p>
-                    Łączymy różnorodne systemy informatyczne, aplikacje i źródła danych, zapewniając ich sprawną komunikację. Automatyzujemy przepływ informacji, ograniczamy ręczną pracę i pomagamy budować spójne środowisko informatyczne, które usprawnia codzienne funkcjonowanie firmy.
+                    Łączymy różnorodne systemy informatyczne,
+                    aplikacje i źródła danych, zapewniając
+                    ich sprawną komunikację.
+
+                    Automatyzujemy przepływ informacji,
+                    ograniczamy ręczną pracę i pomagamy
+                    budować spójne środowisko informatyczne,
+                    które usprawnia codzienne funkcjonowanie firmy.
                 </p>
+
             </div>
 
+
             <div class="korzysc">
+
                 <h3>Wsparcie</h3>
+
                 <p>
-                    Zapewniamy doradztwo, konsultacje oraz pomoc techniczną w zakresie oferowanego oprogramowania i wdrażanych rozwiązań. Wspieramy klientów zarówno podczas wdrożeń, jak i w codziennym użytkowaniu systemów. Dbamy o to, aby technologia działała niezawodnie i odpowiadała na zmieniające się potrzeby biznesu.
+                    Zapewniamy doradztwo, konsultacje
+                    oraz pomoc techniczną w zakresie
+                    oferowanego oprogramowania i wdrażanych
+                    rozwiązań.
+
+                    Wspieramy klientów zarówno podczas
+                    wdrożeń, jak i w codziennym użytkowaniu
+                    systemów.
+
+                    Dbamy o to, aby technologia działała
+                    niezawodnie i odpowiadała na zmieniające
+                    się potrzeby biznesu.
                 </p>
+
             </div>
+
 
         </div>
 
     </section>
 
+
 </main>
+
+
+<!-- KONTAKT -->
 
 <section class="kontakt">
 
@@ -424,13 +612,11 @@ Dobrze dobrane rozwiązania pozwalają firmom pracować sprawniej, ograniczać n
         które mogą usprawnić pracę Twojego przedsiębiorstwa.
     </p>
 
-    <a href="kontakt.html"
-       class="przycisk">
+    <a href="kontakt.html" class="przycisk">
         SKONTAKTUJ SIĘ
     </a>
 
 </section>
-
 
 <footer>
 
@@ -441,32 +627,306 @@ Dobrze dobrane rozwiązania pozwalają firmom pracować sprawniej, ograniczać n
         <div class="sociale">
 
             <a href="https://www.facebook.com/">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
-                     alt="Facebook">
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+                    alt="Facebook">
             </a>
 
             <a href="https://www.youtube.com/channel/UCEssO0SpGFzzKYt2MYKY4gA">
-                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
-                     alt="YouTube">
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+                    alt="YouTube">
             </a>
 
             <a href="https://www.linkedin.com/">
-                <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"
-                     alt="LinkedIn">
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"
+                    alt="LinkedIn">
             </a>
 
         </div>
 
         <div class="linki-stopka">
-            <a href="polityka.html">Polityka prywatności</a>
-            <a href="prawo.html">Prawo autorskie</a>
+
+            <a href="polityka.html">
+                Polityka prywatności
+            </a>
+
+            <a href="prawo.html">
+                Prawo autorskie
+            </a>
+
         </div>
 
-        <p>© 2026 inSolutions. Wszystkie prawa zastrzeżone.</p>
+        <p>
+            © 2026 inSolutions. Wszystkie prawa zastrzeżone.
+        </p>
 
     </div>
 
 </footer>
 
+<script>
+    
+document.addEventListener("DOMContentLoaded", () => {
+
+    // =====================================
+    // USTAWIENIA ANIMACJI
+    // =====================================
+
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) return;
+
+
+    // =====================================
+    // ANIMACJE SEKCJI
+    // =====================================
+
+    const revealElements = document.querySelectorAll(
+        ".sekcja-naglowek, " +
+        ".informacja, " +
+        ".produkt, " +
+        ".korzysc, " +
+        ".kontakt"
+    );
+
+    // Dodajemy klasę animacji
+    revealElements.forEach(element => {
+        element.classList.add("scroll-reveal");
+    });
+
+
+    // =====================================
+    // ANIMACJE ZDJĘĆ
+    // =====================================
+
+    const images = document.querySelectorAll(
+        ".sekcja-obraz img, .produkt img"
+    );
+
+    images.forEach(image => {
+        image.classList.add("image-reveal");
+    });
+
+
+    // =====================================
+    // OBSERWATOR SCROLLOWANIA
+    // =====================================
+
+    if ("IntersectionObserver" in window) {
+
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: "0px 0px -35px 0px"
+            }
+        );
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        images.forEach(image => {
+            observer.observe(image);
+        });
+
+    } else {
+
+        revealElements.forEach(element => {
+            element.classList.add("visible");
+        });
+
+        images.forEach(image => {
+            image.classList.add("visible");
+        });
+
+    }
+
+
+    // =====================================
+    // OPÓŹNIENIE KART
+    // =====================================
+
+    const containers = document.querySelectorAll(
+        ".informacje, .produkty, .korzysci-grid"
+    );
+
+    containers.forEach(container => {
+
+        Array.from(container.children).forEach((card, index) => {
+
+            card.style.setProperty(
+                "--delay",
+                `${index * 150}ms`
+            );
+
+        });
+
+    });
+
+
+    // =====================================
+    // MENU
+    // =====================================
+
+    const menu = document.querySelector(".menu");
+
+    if (menu) {
+        menu.classList.add("menu-visible");
+    }
+
+
+    // =====================================
+    // NAGŁÓWEK
+    // =====================================
+
+    const naglowek = document.querySelector(".naglowek");
+
+    if (naglowek) {
+        naglowek.classList.add("header-visible");
+    }
+
+});
+
+</script>
+//tłumaczenie
+
+<!-- GOOGLE TRANSLATE -->
+
+<script>
+let translateReady = false;
+
+function googleTranslateInit() {
+
+    new google.translate.TranslateElement({
+        pageLanguage: 'pl',
+        includedLanguages: 'pl,en,de',
+        autoDisplay: false
+    }, 'google_translate_element');
+
+    translateReady = true;
+}
+
+function changeLanguage(language) {
+
+    if (!translateReady) {
+        alert("Tłumacz jeszcze się ładuje. Spróbuj za chwilę.");
+        return;
+    }
+
+    const select = document.querySelector(
+        '#google_translate_element select.goog-te-combo'
+    );
+
+    if (!select) {
+        alert("Nie udało się załadować tłumacza Google.");
+        return;
+    }
+
+    select.value = language;
+
+    select.dispatchEvent(
+        new Event('change', { bubbles: true })
+    );
+}
+</script>
+
+<script
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateInit">
+</script>
+<script>
+    
+const COOKIE_KEY = "insolutions_cookies";
+
+function getConsent() {
+    try {
+        return JSON.parse(localStorage.getItem(COOKIE_KEY));
+    } catch {
+        return null;
+    }
+}
+
+function saveConsent(analytics, marketing) {
+    const consent = {
+        necessary: true,
+        analytics: analytics,
+        marketing: marketing,
+        date: new Date().toISOString()
+    };
+
+    localStorage.setItem(COOKIE_KEY, JSON.stringify(consent));
+
+    document.getElementById("cookie-banner").style.display = "none";
+    document.getElementById("cookie-settings").style.display = "none";
+
+    applyConsent(consent);
+}
+
+function acceptAll() {
+    saveConsent(true, true);
+}
+
+function rejectAll() {
+    saveConsent(false, false);
+}
+
+function openSettings() {
+    const consent = getConsent();
+
+    document.getElementById("analytics").checked =
+        consent ? consent.analytics : false;
+
+    document.getElementById("marketing").checked =
+        consent ? consent.marketing : false;
+
+    document.getElementById("cookie-settings").style.display = "flex";
+}
+
+function closeSettings() {
+    document.getElementById("cookie-settings").style.display = "none";
+}
+
+function saveSettings() {
+    saveConsent(
+        document.getElementById("analytics").checked,
+        document.getElementById("marketing").checked
+    );
+}
+
+function applyConsent(consent) {
+    // Tutaj można uruchamiać skrypty analityczne
+    // i marketingowe dopiero po uzyskaniu zgody.
+    console.log("Ustawienia cookies:", consent);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const consent = getConsent();
+
+    if (!consent) {
+        document.getElementById("cookie-banner").style.display = "block";
+    } else {
+        applyConsent(consent);
+    }
+});
+
+</script>
 </body>
 </html>

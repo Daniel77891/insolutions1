@@ -443,3 +443,326 @@ footer {
 
 
 
+/* =========================================
+   INSOLUTIONS - ANIMACJE I POPRAWKI
+========================================= */
+
+
+/* =========================================
+   1. ZDJĘCIA - ZAWSZE WIDOCZNE DOMYŚLNIE
+========================================= */
+
+img {
+    max-width: 100%;
+}
+
+.sekcja-obraz img,
+.produkt img,
+.menu img,
+.sociale img {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
+
+
+/* =========================================
+   2. ANIMACJE SCROLL
+========================================= */
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(55px);
+
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(.2,.7,.2,1);
+
+    transition-delay: var(--delay, 0ms);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   3. ZDJĘCIA - PŁYNNE POJAWIANIE
+========================================= */
+
+.image-reveal {
+    opacity: 0;
+    transform: translateY(35px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.2,.7,.2,1);
+}
+
+.image-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   4. ANIMACJA NAGŁÓWKA
+========================================= */
+
+.naglowek h1,
+.naglowek h3,
+.naglowek h5,
+.naglowek .przycisk {
+    opacity: 0;
+    transform: translateY(35px);
+
+    animation: heroEnter 0.9s ease forwards;
+}
+
+.naglowek h1 {
+    animation-delay: 0.1s;
+}
+
+.naglowek h3 {
+    animation-delay: 0.25s;
+}
+
+.naglowek h5 {
+    animation-delay: 0.4s;
+}
+
+.naglowek .przycisk {
+    animation-delay: 0.55s;
+}
+
+@keyframes heroEnter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   5. KARTY
+========================================= */
+
+.informacja,
+.produkt,
+.korzysc {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+@media (hover: hover) {
+
+    .informacja:hover,
+    .produkt:hover,
+    .korzysc:hover {
+        transform: translateY(-7px);
+    }
+
+}
+
+
+/* =========================================
+   6. PRZYCISKI
+========================================= */
+
+.przycisk {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+@media (hover: hover) {
+
+    .przycisk:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(0,0,0,.15);
+    }
+
+}
+
+
+/* =========================================
+   7. MENU
+========================================= */
+
+.menu {
+    transition: opacity 0.7s ease;
+}
+
+
+/* =========================================
+   8. STOPKA
+========================================= */
+
+.stopka a {
+    transition: opacity 0.3s ease;
+}
+
+.stopka a:hover {
+    opacity: 0.7;
+}
+
+
+/* =========================================
+   9. TELEFONY
+========================================= */
+
+@media (max-width: 768px) {
+
+    .scroll-reveal {
+        transform: translateY(30px);
+        transition-duration: 0.7s;
+    }
+
+    .image-reveal {
+        transform: translateY(20px);
+    }
+
+}
+
+
+/* =========================================
+   10. DOSTĘPNOŚĆ
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .scroll-reveal,
+    .image-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .naglowek h1,
+    .naglowek h3,
+    .naglowek h5,
+    .naglowek .przycisk {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    .informacja,
+    .produkt,
+    .korzysc,
+    .przycisk {
+        transition: none;
+    }
+
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.language-switcher button {
+    background: transparent;
+    border: 1px solid #2878bd;
+    color: inherit;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.language-switcher button:hover {
+    background: #2878bd;
+    color: white;
+}
+
+#google_translate_element {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+
+
+
+#cookie-banner {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background: #17345b;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    z-index: 999999;
+    font-family: Arial;
+    box-shadow: 0 5px 30px #0005;
+}
+
+#cookie-banner p {
+    line-height: 1.6;
+}
+
+#cookie-banner button,
+.cookie-box button {
+    padding: 11px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #2878bd;
+    color: white;
+}
+
+#cookie-settings {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #0009;
+    z-index: 1000000;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.cookie-box {
+    background: white;
+    color: #17345b;
+    padding: 25px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+}
+
+#cookie-reopen {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 999998;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #17345b;
+    color: white;
+    cursor: pointer;
+}
+
+@media(max-width: 600px) {
+    #cookie-banner button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+
+
+

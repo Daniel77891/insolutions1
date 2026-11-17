@@ -15,6 +15,45 @@
 
 <body>
 
+<div id="cookie-banner">
+    <h3>🍪 Pliki cookies</h3>
+    <p>
+        Nasza strona wykorzystuje pliki cookies.
+        Możesz zaakceptować wszystkie lub dostosować swoje ustawienia.
+    </p>
+
+    <button onclick="acceptAll()">Akceptuję wszystkie</button>
+    <button onclick="rejectAll()">Odrzucam opcjonalne</button>
+    <button onclick="openSettings()">Ustawienia</button>
+</div>
+
+<div id="cookie-settings">
+    <div class="cookie-box">
+        <h2>Ustawienia cookies</h2>
+
+        <p>
+            <input type="checkbox" checked disabled>
+            Niezbędne
+        </p>
+
+        <p>
+            <input type="checkbox" id="analytics">
+            Analityczne
+        </p>
+
+        <p>
+            <input type="checkbox" id="marketing">
+            Marketingowe
+        </p>
+
+        <button onclick="saveSettings()">Zapisz ustawienia</button>
+        <button onclick="closeSettings()">Anuluj</button>
+    </div>
+</div>
+
+<button id="cookie-reopen" onclick="openSettings()">
+    Ustawienia cookies
+</button>
 
 <header>
 
@@ -32,7 +71,13 @@
             <a href="kalkulator.html">KALKULATOR</a>
             
 
+<div class="language-switcher">
+    <button onclick="changeLanguage('pl')">PL 🇵🇱</button>
+    <button onclick="changeLanguage('en')">EN 🇬🇧</button>
+    <button onclick="changeLanguage('de')">DE 🇩🇪</button>
+</div>
 
+<div id="google_translate_element"></div>
 
 
         </nav>
@@ -762,6 +807,126 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
+//tłumaczenie
 
+<!-- GOOGLE TRANSLATE -->
+
+<script>
+let translateReady = false;
+
+function googleTranslateInit() {
+
+    new google.translate.TranslateElement({
+        pageLanguage: 'pl',
+        includedLanguages: 'pl,en,de',
+        autoDisplay: false
+    }, 'google_translate_element');
+
+    translateReady = true;
+}
+
+function changeLanguage(language) {
+
+    if (!translateReady) {
+        alert("Tłumacz jeszcze się ładuje. Spróbuj za chwilę.");
+        return;
+    }
+
+    const select = document.querySelector(
+        '#google_translate_element select.goog-te-combo'
+    );
+
+    if (!select) {
+        alert("Nie udało się załadować tłumacza Google.");
+        return;
+    }
+
+    select.value = language;
+
+    select.dispatchEvent(
+        new Event('change', { bubbles: true })
+    );
+}
+</script>
+
+<script
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateInit">
+</script>
+<script>
+    
+const COOKIE_KEY = "insolutions_cookies";
+
+function getConsent() {
+    try {
+        return JSON.parse(localStorage.getItem(COOKIE_KEY));
+    } catch {
+        return null;
+    }
+}
+
+function saveConsent(analytics, marketing) {
+    const consent = {
+        necessary: true,
+        analytics: analytics,
+        marketing: marketing,
+        date: new Date().toISOString()
+    };
+
+    localStorage.setItem(COOKIE_KEY, JSON.stringify(consent));
+
+    document.getElementById("cookie-banner").style.display = "none";
+    document.getElementById("cookie-settings").style.display = "none";
+
+    applyConsent(consent);
+}
+
+function acceptAll() {
+    saveConsent(true, true);
+}
+
+function rejectAll() {
+    saveConsent(false, false);
+}
+
+function openSettings() {
+    const consent = getConsent();
+
+    document.getElementById("analytics").checked =
+        consent ? consent.analytics : false;
+
+    document.getElementById("marketing").checked =
+        consent ? consent.marketing : false;
+
+    document.getElementById("cookie-settings").style.display = "flex";
+}
+
+function closeSettings() {
+    document.getElementById("cookie-settings").style.display = "none";
+}
+
+function saveSettings() {
+    saveConsent(
+        document.getElementById("analytics").checked,
+        document.getElementById("marketing").checked
+    );
+}
+
+function applyConsent(consent) {
+    // Tutaj można uruchamiać skrypty analityczne
+    // i marketingowe dopiero po uzyskaniu zgody.
+    console.log("Ustawienia cookies:", consent);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const consent = getConsent();
+
+    if (!consent) {
+        document.getElementById("cookie-banner").style.display = "block";
+    } else {
+        applyConsent(consent);
+    }
+});
+
+</script>
 </body>
 </html>

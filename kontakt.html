@@ -320,6 +320,69 @@ body {
     text-decoration: none;
 }
 
+.language-switcher{
+text-decoration: none;
+color: white;
+
+}
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.language-switcher button {
+    background: transparent;
+    border: 1px solid #2878bd;
+    color: inherit;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.language-switcher button:hover {
+    background: #2878bd;
+    color: white;
+}
+
+#google_translate_element {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #00bfff;
+}
+
+.language-switcher {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+}
+
+.language-switcher button {
+    cursor: pointer;
+}
+
 
 
 </style>
@@ -338,10 +401,24 @@ body {
             Napisz do nas. Chętnie pomożemy.
         </p>
     </div>
-    <nav>
-        <a href="index.html">Strona główna</a>
-        <a href="kontakt.html" class="active">Kontakt</a>
-    </nav>
+  <nav>
+<a href="index.html">STRONA GŁÓWNA</a>
+<a href="oferta.html">OFERTA</a>
+<a href="wdrozenia.html">WDROŻENIA</a>
+<a href="https://www.insklep.pl/">INSKLEP</a>
+<a href="kalkulator.html">KALKULATOR</a>
+
+
+<div class="language-switcher">
+    <button onclick="changeLanguage('pl')">PL 🇵🇱</button>
+    <button onclick="changeLanguage('en')">EN 🇬🇧</button>
+    <button onclick="changeLanguage('de')">DE 🇩🇪</button>
+</div>
+
+<div id="google_translate_element"></div>
+
+
+        </nav>
 </section>
 
 <main class="contact-container">
@@ -488,7 +565,7 @@ body {
                     <input type="checkbox" id="consent" required>
                     <span>
                         Zapoznałem/am się z
-                        <a href="polityka-prywatnosci.html">
+                        <a href="prywatnosci.html">
                             polityką prywatności
                         </a>
                         i informacją o przetwarzaniu danych.
@@ -510,31 +587,97 @@ body {
 
     </section>
 
-    <section class="map-section">
+<section class="contact-map">
+    <h2>Znajdź nas</h2>
 
-        <div class="map-heading">
-            <span class="eyebrow">LOKALIZACJA</span>
-            <h2>Znajdź nas na mapie</h2>
-            <p>Zapraszamy do naszej siedziby.</p>
-        </div>
-
-        <div id="map"></div>
-
-    </section>
+    <iframe
+        src="https://www.google.com/maps?q=Zabrze&output=embed"
+        width="100%"
+        height="400"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</section>
 
 </main>
 
+
+<!-- PANEL ADMINISTRATORA -->
+
+<section class="admin-panel" id="adminPanel" hidden>
+
+    <h2>Panel administratora INsolutions</h2>
+
+    <div id="adminLogin">
+
+        <p>Zaloguj się, aby zobaczyć wiadomości klientów.</p>
+
+        <form id="adminLoginForm">
+
+            <label for="adminEmail">Adres e-mail</label>
+            <input
+                type="email"
+                id="adminEmail"
+                required
+                autocomplete="username"
+            >
+
+            <label for="adminPassword">Hasło</label>
+            <input
+                type="password"
+                id="adminPassword"
+                required
+                autocomplete="current-password"
+            >
+
+            <button type="submit">Zaloguj się</button>
+
+        </form>
+
+        <p id="adminLoginMessage" role="status"></p>
+
+    </div>
+
+    <div id="adminContent" hidden>
+
+        <div class="admin-top">
+
+            <h2>Wiadomości klientów</h2>
+
+            <button id="adminLogout">
+                Wyloguj się
+            </button>
+
+        </div>
+
+        <p id="adminCount">Ładowanie wiadomości...</p>
+
+        <input
+            type="search"
+            id="adminSearch"
+            placeholder="Szukaj wiadomości..."
+        >
+
+        <div id="adminMessages"></div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
 <footer class="contact-footer">
-    <p>© <span id="year"></span> Twoja Firma. Wszelkie prawa zastrzeżone.</p>
-    <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+    <p>© <span id="year"></span> inSolutions. Wszelkie prawa zastrzeżone.</p>
+    <a href="prawo.html">Polityka prywatności</a>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script src="js/supabase.js"></script>
-<script src="js/kontakt.js"></script>
 
 
 <script>
@@ -678,5 +821,377 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
+
+<!-- GOOGLE TRANSLATE -->
+
+<script>
+let translateReady = false;
+
+function googleTranslateInit() {
+
+    new google.translate.TranslateElement({
+        pageLanguage: 'pl',
+        includedLanguages: 'pl,en,de',
+        autoDisplay: false
+    }, 'google_translate_element');
+
+    translateReady = true;
+}
+
+function changeLanguage(language) {
+
+    if (!translateReady) {
+        alert("Tłumacz jeszcze się ładuje. Spróbuj za chwilę.");
+        return;
+    }
+
+    const select = document.querySelector(
+        '#google_translate_element select.goog-te-combo'
+    );
+
+    if (!select) {
+        alert("Nie udało się załadować tłumacza Google.");
+        return;
+    }
+
+    select.value = language;
+
+    select.dispatchEvent(
+        new Event('change', { bubbles: true })
+    );
+}
+</script>
+
+<script
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateInit">
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://umpepvcbaufwykfgvusd.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_zJHozD9wR1dUZcbfObtUYg_Tak-Tts9";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const formularz = document.getElementById("contactForm");
+    const przycisk = document.getElementById("submitButton");
+    const komunikat = document.getElementById("formMessage");
+
+    formularz.addEventListener("submit", async function(e) {
+
+        e.preventDefault();
+
+        przycisk.disabled = true;
+        przycisk.querySelector("span").textContent = "Wysyłanie...";
+
+        komunikat.className = "form-message";
+        komunikat.textContent = "";
+
+        const dane = {
+            imie_nazwisko: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            telefon: document.getElementById("phone").value.trim(),
+            temat: document.getElementById("category").value,
+            subject: document.getElementById("subject").value.trim(),
+            wiadomosc: document.getElementById("message").value.trim(),
+            zgoda: document.getElementById("consent").checked
+        };
+
+        try {
+
+            const { error } = await supabaseClient
+                .from("wiadomosci")
+                .insert([dane]);
+
+            if (error) {
+                throw error;
+            }
+
+            komunikat.textContent =
+                "Dziękujemy! Twoja wiadomość została wysłana.";
+
+            komunikat.className = "form-message success";
+
+            formularz.reset();
+
+        } catch (error) {
+
+            console.error("Błąd Supabase:", error);
+
+            komunikat.textContent =
+                "Nie udało się wysłać wiadomości. Spróbuj ponownie.";
+
+            komunikat.className = "form-message error";
+
+        } finally {
+
+            przycisk.disabled = false;
+            przycisk.querySelector("span").textContent =
+                "Wyślij wiadomość";
+
+        }
+
+    });
+
+});
+</script>
+
+
+<script>
+    
+
+document.addEventListener("DOMContentLoaded", async function () {
+
+    const panel = document.getElementById("adminPanel");
+
+    // Panel pokazuje się po wejściu z #admin
+    if (window.location.hash !== "#admin") return;
+
+    panel.hidden = false;
+
+    const login = document.getElementById("adminLogin");
+    const content = document.getElementById("adminContent");
+    const loginForm = document.getElementById("adminLoginForm");
+    const loginMessage = document.getElementById("adminLoginMessage");
+    const messagesContainer = document.getElementById("adminMessages");
+    const count = document.getElementById("adminCount");
+    const search = document.getElementById("adminSearch");
+
+    let allMessages = [];
+
+    async function loadMessages() {
+
+        messagesContainer.replaceChildren();
+        count.textContent = "Ładowanie...";
+
+        const { data, error } = await supabaseClient
+            .from("wiadomosci")
+            .select("*")
+            .order("data_wyslania", { ascending: false });
+
+        if (error) {
+            count.textContent = "Nie udało się pobrać wiadomości.";
+            console.error(error);
+            return;
+        }
+
+        allMessages = data || [];
+
+        renderMessages(allMessages);
+    }
+
+    function renderMessages(messages) {
+
+        messagesContainer.replaceChildren();
+
+        count.textContent =
+            "Liczba wiadomości: " + messages.length;
+
+        if (messages.length === 0) {
+            messagesContainer.textContent =
+                "Nie znaleziono wiadomości.";
+            return;
+        }
+
+        messages.forEach(function (message) {
+
+            const article = document.createElement("article");
+            article.className = "admin-message";
+
+            const title = document.createElement("h3");
+            title.textContent = message.imie_nazwisko;
+
+            const email = document.createElement("p");
+            email.textContent = "E-mail: " + message.email;
+
+            const phone = document.createElement("p");
+            phone.textContent = "Telefon: " + (message.telefon || "-");
+
+            const category = document.createElement("p");
+            category.textContent = "Kategoria: " + message.temat;
+
+            const subject = document.createElement("p");
+            subject.textContent = "Temat: " + (message.subject || "-");
+
+            const date = document.createElement("p");
+            date.textContent = "Data: " +
+                new Date(message.data_wyslania).toLocaleString("pl-PL");
+
+            const body = document.createElement("p");
+            body.textContent = "Wiadomość: " + message.wiadomosc;
+
+            const statusLabel = document.createElement("p");
+            statusLabel.textContent = "Status:";
+
+            const status = document.createElement("select");
+            status.className = "admin-status";
+
+            const statuses = [
+                ["nowa", "Nowa"],
+                ["w trakcie", "W trakcie"],
+                ["zakonczona", "Zakończona"]
+            ];
+
+            statuses.forEach(function (item) {
+                const option = document.createElement("option");
+                option.value = item[0];
+                option.textContent = item[1];
+                status.appendChild(option);
+            });
+
+            status.value = message.status || "nowa";
+
+            status.addEventListener("change", async function () {
+
+                status.disabled = true;
+
+                const { error } = await supabaseClient
+                    .from("wiadomosci")
+                    .update({ status: status.value })
+                    .eq("id", message.id);
+
+                if (error) {
+                    alert("Nie udało się zmienić statusu.");
+                    console.error(error);
+                    status.value = message.status || "nowa";
+                } else {
+                    message.status = status.value;
+                }
+
+                status.disabled = false;
+            });
+
+            article.append(
+                title,
+                email,
+                phone,
+                category,
+                subject,
+                date,
+                body,
+                statusLabel,
+                status
+            );
+
+            messagesContainer.appendChild(article);
+        });
+    }
+
+    // Logowanie administratora
+
+    loginForm.addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+        loginMessage.textContent = "Logowanie...";
+
+        const email = document.getElementById("adminEmail").value;
+        const password = document.getElementById("adminPassword").value;
+
+        const { error } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            loginMessage.textContent = "Błędny e-mail lub hasło.";
+            loginMessage.className = "admin-error";
+            return;
+        }
+
+        loginMessage.textContent = "";
+        await checkSession();
+    });
+
+    // Sprawdzenie zalogowanego użytkownika
+
+    async function checkSession() {
+
+        const { data, error } =
+            await supabaseClient.auth.getSession();
+
+        if (error || !data.session) {
+            login.hidden = false;
+            content.hidden = true;
+            return;
+        }
+
+        login.hidden = true;
+        content.hidden = false;
+
+        await loadMessages();
+    }
+
+    // Wyszukiwanie
+
+    search.addEventListener("input", function () {
+
+        const phrase = search.value.toLowerCase();
+
+        const filtered = allMessages.filter(function (m) {
+
+            return [
+                m.imie_nazwisko,
+                m.email,
+                m.temat,
+                m.subject,
+                m.wiadomosc
+            ].some(value =>
+                String(value || "").toLowerCase().includes(phrase)
+            );
+
+        });
+
+        renderMessages(filtered);
+    });
+
+    // Wylogowanie
+
+    document.getElementById("adminLogout")
+        .addEventListener("click", async function () {
+
+            await supabaseClient.auth.signOut();
+
+            login.hidden = false;
+            content.hidden = true;
+            loginForm.reset();
+            messagesContainer.replaceChildren();
+
+        });
+
+    await checkSession();
+
+});
+
+
+</script>
 </body>
 </html>
+
+

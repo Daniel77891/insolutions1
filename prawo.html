@@ -116,11 +116,22 @@
         </a>
 
         <nav>
-            <a href="index.html">STRONA GŁÓWNA</a>
-            <a href="oferta.html">OFERTA</a>
-            <a href="wdrozenia.html">WDROŻENIA</a>
-            <a href="https://www.insklep.pl/">INSKLEP</a>
-            <a href="kalkulator.html">KALKULATOR</a>
+<a href="index.html">STRONA GŁÓWNA</a>
+<a href="oferta.html">OFERTA</a>
+<a href="wdrozenia.html">WDROŻENIA</a>
+<a href="https://www.insklep.pl/">INSKLEP</a>
+<a href="kalkulator.html">KALKULATOR</a>
+
+
+<div class="language-switcher">
+    <button onclick="changeLanguage('pl')">PL 🇵🇱</button>
+    <button onclick="changeLanguage('en')">EN 🇬🇧</button>
+    <button onclick="changeLanguage('de')">DE 🇩🇪</button>
+</div>
+
+<div id="google_translate_element"></div>
+
+
         </nav>
 
     </div>
@@ -274,8 +285,9 @@
         </p>
 
         <p>
-            <a href="https://www.insolutions.pl/kontakt">
-                https://www.insolutions.pl/kontakt
+            <a href="kontakt.html">
+                kontakt
+              
             </a>
         </p>
 
@@ -481,6 +493,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+</script>
+
+<!-- GOOGLE TRANSLATE -->
+
+<script>
+let translateReady = false;
+
+function googleTranslateInit() {
+
+    new google.translate.TranslateElement({
+        pageLanguage: 'pl',
+        includedLanguages: 'pl,en,de',
+        autoDisplay: false
+    }, 'google_translate_element');
+
+    translateReady = true;
+}
+
+function changeLanguage(language) {
+
+    if (!translateReady) {
+        alert("Tłumacz jeszcze się ładuje. Spróbuj za chwilę.");
+        return;
+    }
+
+    const select = document.querySelector(
+        '#google_translate_element select.goog-te-combo'
+    );
+
+    if (!select) {
+        alert("Nie udało się załadować tłumacza Google.");
+        return;
+    }
+
+    select.value = language;
+
+    select.dispatchEvent(
+        new Event('change', { bubbles: true })
+    );
+}
+</script>
+
+<script
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateInit">
 </script>
 </body>
 </html>

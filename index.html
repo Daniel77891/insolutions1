@@ -915,11 +915,11 @@ function applyConsent(consent) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("cookie-banner").style.display = "block";
+
     const consent = getConsent();
 
-    if (!consent) {
-        document.getElementById("cookie-banner").style.display = "block";
-    } else {
+    if (consent) {
         applyConsent(consent);
     }
 });

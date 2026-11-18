@@ -215,26 +215,33 @@ footer {
     margin-top: 60px;
 }
 
-@media(max-width:600px) {
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-    .karta {
-        padding: 20px;
-    }
+.language-switcher button {
+    background: transparent;
+    border: 1px solid #2878bd;
+    color: inherit;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-    header h1 {
-        font-size: 24px;
-    }
+.language-switcher button:hover {
+    background: #2878bd;
+    color: white;
+}
 
-    nav a {
-        display: inline-block;
-        font-size: 11px;
-        margin: 5px;
-    }
-
-    .cena {
-        font-size: 28px;
-    }
-
+#google_translate_element {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 
 
@@ -259,7 +266,20 @@ footer {
 <a href="wdrozenia.html">WDROŻENIA</a>
 <a href="https://www.insklep.pl/">INSKLEP</a>
 <a href="kalkulator.html">KALKULATOR</a>
-</nav>
+
+
+<div class="language-switcher">
+    <button onclick="changeLanguage('pl')">PL 🇵🇱</button>
+    <button onclick="changeLanguage('en')">EN 🇬🇧</button>
+    <button onclick="changeLanguage('de')">DE 🇩🇪</button>
+</div>
+
+<div id="google_translate_element"></div>
+
+
+        </nav>
+
+    
 
 </header>
 
@@ -837,6 +857,48 @@ function wyslijEmail() {
 }
 
 </script>
+<!-- GOOGLE TRANSLATE -->
 
+<script>
+let translateReady = false;
+
+function googleTranslateInit() {
+
+    new google.translate.TranslateElement({
+        pageLanguage: 'pl',
+        includedLanguages: 'pl,en,de',
+        autoDisplay: false
+    }, 'google_translate_element');
+
+    translateReady = true;
+}
+
+function changeLanguage(language) {
+
+    if (!translateReady) {
+        alert("Tłumacz jeszcze się ładuje. Spróbuj za chwilę.");
+        return;
+    }
+
+    const select = document.querySelector(
+        '#google_translate_element select.goog-te-combo'
+    );
+
+    if (!select) {
+        alert("Nie udało się załadować tłumacza Google.");
+        return;
+    }
+
+    select.value = language;
+
+    select.dispatchEvent(
+        new Event('change', { bubbles: true })
+    );
+}
+</script>
+
+<script
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateInit">
+</script>
 </body>
 </html>

@@ -24,13 +24,23 @@
         <a href="index.html">
             <img src="logo.svg" alt="inSolutions">
         </a>
+<nav>
+<a href="index.html">STRONA GŁÓWNA</a>
+<a href="oferta.html">OFERTA</a>
+<a href="wdrozenia.html">WDROŻENIA</a>
+<a href="https://www.insklep.pl/">INSKLEP</a>
+<a href="kalkulator.html">KALKULATOR</a>
 
-            <nav>
-            <a href="index.html">STRONA GŁÓWNA</a>
-            <a href="oferta.html">OFERTA</a>
-            <a href="wdrozenia.html">WDROŻENIA</a>
-            <a href="https://www.insklep.pl/">INSKLEP</a>
-            <a href="kalkulator.html">KALKULATOR</a>
+
+<div class="language-switcher">
+    <button onclick="changeLanguage('pl')">PL 🇵🇱</button>
+    <button onclick="changeLanguage('en')">EN 🇬🇧</button>
+    <button onclick="changeLanguage('de')">DE 🇩🇪</button>
+</div>
+
+<div id="google_translate_element"></div>
+
+
         </nav>
     </div>
 
@@ -165,7 +175,7 @@
 
             <article class="produkt">
 
-                <img src="intradusprogram.png" alt="Platforma inTradus">
+                <img src="intradus logo.png" alt="Platforma inTradus">
 
                 <div class="produkt-tresc">
 
@@ -200,7 +210,7 @@
 
             <article class="produkt">
 
-                <img src="inwmsprogram.png" alt="System magazynowy inWMS">
+                <img src="inwms logo.png" alt="System magazynowy inWMS">
 
                 <div class="produkt-tresc">
 
@@ -236,7 +246,7 @@
 
             <article class="produkt">
 
-                <img src="inmobilusprogram.png" alt="Aplikacja inMobilus">
+                <img src="logo inmobilus.png" alt="Aplikacja inMobilus">
 
                 <div class="produkt-tresc">
 
@@ -271,7 +281,7 @@
 
             <article class="produkt">
 
-                <img src="inposprogram.jpg" alt="Stanowisko sprzedaży inPOS">
+                <img src="inpos logo.png" alt="Stanowisko sprzedaży inPOS">
 
                 <div class="produkt-tresc">
 
@@ -618,6 +628,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+</script>
+
+<!-- GOOGLE TRANSLATE -->
+
+<script>
+let translateReady = false;
+
+function googleTranslateInit() {
+
+    new google.translate.TranslateElement({
+        pageLanguage: 'pl',
+        includedLanguages: 'pl,en,de',
+        autoDisplay: false
+    }, 'google_translate_element');
+
+    translateReady = true;
+}
+
+function changeLanguage(language) {
+
+    if (!translateReady) {
+        alert("Tłumacz jeszcze się ładuje. Spróbuj za chwilę.");
+        return;
+    }
+
+    const select = document.querySelector(
+        '#google_translate_element select.goog-te-combo'
+    );
+
+    if (!select) {
+        alert("Nie udało się załadować tłumacza Google.");
+        return;
+    }
+
+    select.value = language;
+
+    select.dispatchEvent(
+        new Event('change', { bubbles: true })
+    );
+}
+</script>
+
+<script
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateInit">
 </script>
 </body>
 </html>

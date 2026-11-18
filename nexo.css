@@ -577,14 +577,7 @@ img {
         box-shadow 0.35s ease;
 }
 
-@media (hover: hover) {
 
-    .przycisk:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 25px rgba(0,0,0,.15);
-    }
-
-}
 
 
 /* =========================================
@@ -609,54 +602,7 @@ img {
 }
 
 
-/* =========================================
-   9. TELEFONY
-========================================= */
 
-@media (max-width: 768px) {
-
-    .scroll-reveal {
-        transform: translateY(30px);
-        transition-duration: 0.7s;
-    }
-
-    .image-reveal {
-        transform: translateY(20px);
-    }
-
-}
-
-
-/* =========================================
-   10. DOSTĘPNOŚĆ
-========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .scroll-reveal,
-    .image-reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-    }
-
-    .naglowek h1,
-    .naglowek h3,
-    .naglowek h5,
-    .naglowek .przycisk {
-        opacity: 1;
-        transform: none;
-        animation: none;
-    }
-
-    .informacja,
-    .produkt,
-    .korzysc,
-    .przycisk {
-        transition: none;
-    }
-
-}
 
 .language-switcher {
     display: flex;
@@ -756,12 +702,7 @@ img {
     cursor: pointer;
 }
 
-@media(max-width: 600px) {
-    #cookie-banner button {
-        width: 100%;
-        margin: 5px 0;
-    }
-}
+
 
 
 

@@ -15,6 +15,17 @@
 
 <body>
 
+
+
+
+
+
+
+
+
+
+
+    
 <div id="cookie-banner">
     <h3>🍪 Pliki cookies</h3>
     <p>
@@ -26,6 +37,18 @@
     <button onclick="rejectAll()">Odrzucam opcjonalne</button>
     <button onclick="openSettings()">Ustawienia</button>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div id="cookie-settings">
     <div class="cookie-box">
@@ -55,60 +78,87 @@
     Ustawienia cookies
 </button>
 
-<header>
+
+<header class="site-header">
 
     <div class="menu">
 
-        <a href="index.html">
-            <img src="logo.svg" alt="inSolutions" title="inSolutions">
+        <a href="index.html" class="logo" aria-label="inSolutions – strona główna">
+            <img src="logo.svg" alt="inSolutions">
         </a>
 
-        <nav>
-            <a href="index.html">STRONA GŁÓWNA</a>
+        <nav aria-label="Menu główne">
+
+       
             <a href="oferta.html">OFERTA</a>
             <a href="wdrozenia.html">WDROŻENIA</a>
             <a href="https://www.insklep.pl/">INSKLEP</a>
             <a href="kalkulator.html">KALKULATOR</a>
-            
-
-<div class="language-switcher">
-    <button onclick="changeLanguage('pl')">PL 🇵🇱</button>
-    <button onclick="changeLanguage('en')">EN 🇬🇧</button>
-    <button onclick="changeLanguage('de')">DE 🇩🇪</button>
-</div>
-
-<div id="google_translate_element"></div>
-
+            <a href="kontakt.html">KONTAKT</a>
 
         </nav>
 
+        <div class="language-switcher" aria-label="Wybór języka">
+            <button type="button" onclick="changeLanguage('pl')">PL</button>
+            <button type="button" onclick="changeLanguage('en')">EN</button>
+            <button type="button" onclick="changeLanguage('de')">DE</button>
+        </div>
+
+
+
+<div class="search-container">
+    <button id="search-toggle" aria-label="Otwórz wyszukiwarkę">
+        🔍
+    </button>
+
+    <div id="search-box">
+        <input
+            type="search"
+            id="search-input"
+            placeholder="Czego szukasz?"
+        >
+        <div id="search-results"></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+        <div id="google_translate_element"></div>
+
     </div>
 
-    <div class="naglowek">
+    <div class="naglowek" id="start">
 
         <h1 id="pierwsze">
             Odkryj pełen potencjał Subiekta nexo PRO
         </h1>
 
-        <h3>
+        <h2>
             Więcej integracji. Więcej możliwości.
             Sprawniejsza firma.
-        </h3>
+        </h2>
 
-        <h5>
+        <p>
             Poznaj rozwiązania inSolutions, które pomagają
             rozszerzyć możliwości systemów sprzedażowych,
             usprawnić obsługę zamówień i zarządzanie
             przedsiębiorstwem.
-        </h5>
+        </p>
 
-        <a href="oferta.html" class="przycisk">
+        <a href="#oferta" class="przycisk">
             POZNAJ NASZĄ OFERTĘ
         </a>
 
     </div>
 
 </header>
+
     <script>
         if (prompt("Podaj hasło:") !== "praktyki") {
   alert("Nieprawidłowe hasło!");
@@ -225,6 +275,52 @@
         </div>
 
     </section>
+
+<section class="porownanie">
+
+    <div class="sekcja-naglowek">
+        <h2>Subiekt nexo a Subiekt nexo PRO</h2>
+        <p>
+            Poznaj różnice i wybierz rozwiązanie
+            odpowiadające potrzebom Twojej firmy.
+        </p>
+    </div>
+
+    <div class="porownanie-grid">
+
+        <article class="porownanie-karta">
+            <h3>Subiekt nexo</h3>
+            <p>
+                System wspierający podstawową obsługę
+                sprzedaży i gospodarki magazynowej.
+            </p>
+            <ul>
+                <li>Obsługa dokumentów sprzedaży</li>
+                <li>Zarządzanie asortymentem</li>
+                <li>Obsługa kontrahentów</li>
+                <li>Kontrola stanów magazynowych</li>
+            </ul>
+        </article>
+
+        <article class="porownanie-karta">
+            <h3>Subiekt nexo PRO</h3>
+            <p>
+                Rozszerzona wersja systemu oferująca
+                dodatkowe możliwości konfiguracji
+                i dostosowania do potrzeb firmy.
+            </p>
+            <ul>
+                <li>Rozszerzone możliwości konfiguracji</li>
+                <li>Dodatkowe rozwiązania i funkcje</li>
+                <li>Możliwość rozbudowy systemu</li>
+                <li>Większa elastyczność pracy</li>
+            </ul>
+        </article>
+
+    </div>
+
+</section>
+
 
 
     <!-- NASZE ROZWIĄZANIA -->
@@ -478,7 +574,9 @@
 
         </div>
 
-        
+        <img src="system.jpg"
+             alt="Integracja systemów informatycznych"
+             title="Systemy informatyczne">
 
     </section>
 
@@ -595,6 +693,75 @@
 
 </main>
 
+<!-- OPINIE KLIENTÓW -->
+
+<section class="opinie">
+
+    <div class="sekcja-naglowek">
+        <h2>Opinie naszych klientów</h2>
+        <p>
+            Podziel się swoją opinią na temat współpracy z inSolutions.
+        </p>
+    </div>
+
+    <div class="opinia-formularz">
+
+        <h3>Dodaj swoją opinię</h3>
+
+        <form id="formularz-opinii">
+
+            <label for="opinia-imie">Twoje imię</label>
+            <input
+                type="text"
+                id="opinia-imie"
+                placeholder="Wpisz swoje imię"
+                maxlength="40"
+                required
+            >
+
+            <label>Ocena</label>
+
+            <div class="wybor-gwiazdek">
+                <input type="radio" name="ocena" value="5" id="gw5" required>
+                <label for="gw5">★</label>
+
+                <input type="radio" name="ocena" value="4" id="gw4">
+                <label for="gw4">★</label>
+
+                <input type="radio" name="ocena" value="3" id="gw3">
+                <label for="gw3">★</label>
+
+                <input type="radio" name="ocena" value="2" id="gw2">
+                <label for="gw2">★</label>
+
+                <input type="radio" name="ocena" value="1" id="gw1">
+                <label for="gw1">★</label>
+            </div>
+
+            <label for="opinia-tresc">Treść opinii</label>
+
+            <textarea
+                id="opinia-tresc"
+                placeholder="Napisz, co sądzisz o naszych rozwiązaniach..."
+                maxlength="1000"
+                required
+            ></textarea>
+
+            <button type="submit" class="przycisk">
+                DODAJ OPINIĘ
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="lista-opinii">
+        <h3>Opinie użytkowników</h3>
+        <div id="opinie-kontener"></div>
+    </div>
+
+</section>
+
 
 <!-- KONTAKT -->
 
@@ -660,6 +827,131 @@
     </div>
 
 </footer>
+<!-- Panel dostępności WCAG -->
+<div id="accessibility-panel" aria-label="Panel dostępności" role="region" style="position:fixed; top:50%; left:0; transform:translateY(-50%);
+  background:#17345b; padding:0.5em; border-radius:0 8px 8px 0; z-index:100000; display:flex; flex-direction:column; gap:0.4em;">
+
+  <button id="btn-sign-language" aria-label="Przełącz tłumaczenie na język migowy" aria-pressed="false" title="Tłumaczenie na język migowy"
+    style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-size:22px; border-radius:4px; display:flex; justify-content:center; align-items:center;">
+    🧏‍♂️
+  </button>
+
+  <button id="btn-contrast" aria-label="Przełącz tryb wysokiego kontrastu" aria-pressed="false" title="Wysoki kontrast"
+    style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-size:22px; border-radius:4px; display:flex; justify-content:center; align-items:center;">
+    ⚫
+  </button>
+
+  <button id="btn-zoom-in" aria-label="Powiększ stronę" title="Powiększ stronę"
+    style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-weight:bold; font-size:20px; border-radius:4px;">
+    A+
+  </button>
+
+  <button id="btn-zoom-out" aria-label="Zmniejsz stronę" title="Zmniejsz stronę"
+    style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-weight:bold; font-size:20px; border-radius:4px;">
+    A-
+  </button>
+
+  <button id="btn-reset" aria-label="Resetuj ustawienia dostępności" title="Resetuj"
+    style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-size:18px; border-radius:4px;">
+    ↺
+  </button>
+</div>
+
+<!-- Panel tłumaczenia na język migowy -->
+<div id="sign-language-panel" role="region" aria-label="Tłumaczenie na język migowy" tabindex="-1"
+  style="display:none; position:fixed; bottom:0; left:60px; background:white; border:2px solid #17345b; z-index:100001; width:320px; height:240px; box-shadow:0 4px 15px rgba(0,0,0,0.3); border-radius:8px; padding:0.5em;">
+  <button id="btn-close-sign-language" class="close" aria-label="Zamknij tłumaczenie języka migowego"
+    style="position:absolute; top:4px; right:8px; background:transparent; border:none; font-size:20px; cursor:pointer; color:#17345b;">✖</button>
+  <video controls width="100%" height="100%">
+    <source src="twoj-film-migowy.mp4" type="video/mp4" />
+    Przeglądarka nie obsługuje odtwarzania video.
+  </video>
+</div>
+
+<script>
+  const btnSign = document.getElementById('btn-sign-language');
+  const btnContrast = document.getElementById('btn-contrast');
+  const btnZoomIn = document.getElementById('btn-zoom-in');
+  const btnZoomOut = document.getElementById('btn-zoom-out');
+  const btnReset = document.getElementById('btn-reset');
+  const signPanel = document.getElementById('sign-language-panel');
+  const btnCloseSL = document.getElementById('btn-close-sign-language');
+
+  btnSign.addEventListener('click', () => {
+    if (signPanel.style.display === 'block') {
+      signPanel.style.display = 'none';
+      btnSign.setAttribute('aria-pressed', 'false');
+    } else {
+      signPanel.style.display = 'block';
+      btnSign.setAttribute('aria-pressed', 'true');
+      signPanel.focus();
+    }
+  });
+
+  btnCloseSL.addEventListener('click', () => {
+    signPanel.style.display = 'none';
+    btnSign.setAttribute('aria-pressed', 'false');
+    btnSign.focus();
+  });
+
+  btnContrast.addEventListener('click', () => {
+    document.body.classList.toggle('high-contrast');
+    const pressed = document.body.classList.contains('high-contrast');
+    btnContrast.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+  });
+
+  btnZoomIn.addEventListener('click', () => {
+    document.body.classList.add('zoom-in');
+    document.body.classList.remove('zoom-out');
+  });
+
+  btnZoomOut.addEventListener('click', () => {
+    document.body.classList.add('zoom-out');
+    document.body.classList.remove('zoom-in');
+  });
+
+  btnReset.addEventListener('click', () => {
+    document.body.classList.remove('high-contrast', 'zoom-in', 'zoom-out');
+    btnContrast.setAttribute('aria-pressed', 'false');
+  });
+</script>
+
+<style>
+  /* Style dla trybów dostępności */
+  body.high-contrast {
+    background-color: black !important;
+    color: yellow !important;
+  }
+  
+  /* Dodanie obsługi wszystkich głównych elementów tekstowych */
+  body.high-contrast p,
+  body.high-contrast h1,
+  body.high-contrast h2,
+  body.high-contrast h3,
+  body.high-contrast h4,
+  body.high-contrast h5,
+  body.high-contrast h6,
+  body.high-contrast li,
+  body.high-contrast span,
+  body.high-contrast a,
+  body.high-contrast button {
+    color: yellow !important;
+  }
+
+  body.high-contrast a:hover,
+  body.high-contrast button:hover {
+    color: #ffea00 !important;
+  }
+
+  body.zoom-in {
+    zoom: 1.2;
+  }
+
+  body.zoom-out {
+    zoom: 0.8;
+  }
+</style>
+
 
 <script>
     
@@ -802,7 +1094,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
-//tłumaczenie
+
 
 <!-- GOOGLE TRANSLATE -->
 
@@ -922,6 +1214,231 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const links = document.querySelectorAll(".menu nav a");
+
+    const currentPage = window.location.pathname
+        .split("/")
+        .pop() || "index.html";
+
+    links.forEach(link => {
+
+        const href = link.getAttribute("href");
+
+        if (!href || href.startsWith("http") || href.startsWith("#")) {
+            return;
+        }
+
+        const linkPage = href.split("#")[0];
+
+        if (linkPage === currentPage) {
+            link.classList.add("active");
+            link.setAttribute("aria-current", "page");
+        }
+
+    });
+
+});
+</script>
+<script>
+// SYSTEM DODAWANIA OPINII
+
+const formularzOpinii = document.getElementById("formularz-opinii");
+const kontenerOpinii = document.getElementById("opinie-kontener");
+
+const KLUCZ_OPINII = "insolutions_opinie";
+
+function pobierzOpinie() {
+    try {
+        const dane = JSON.parse(localStorage.getItem(KLUCZ_OPINII));
+        return Array.isArray(dane) ? dane : [];
+    } catch {
+        return [];
+    }
+}
+
+function wyswietlOpinie() {
+
+    const opinie = pobierzOpinie();
+
+    kontenerOpinii.replaceChildren();
+
+    opinie.forEach(opinia => {
+
+        const karta = document.createElement("article");
+        karta.className = "karta-opinii";
+
+        const imie = document.createElement("h4");
+        imie.textContent = opinia.imie;
+
+        const gwiazdki = document.createElement("div");
+        gwiazdki.className = "gwiazdki";
+        gwiazdki.textContent = "★".repeat(opinia.ocena);
+
+        const tresc = document.createElement("p");
+        tresc.textContent = opinia.tresc;
+
+        karta.append(imie, gwiazdki, tresc);
+        kontenerOpinii.appendChild(karta);
+
+    });
+
+}
+
+formularzOpinii.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const imie = document.getElementById("opinia-imie").value.trim();
+    const tresc = document.getElementById("opinia-tresc").value.trim();
+
+    const wybranaOcena = document.querySelector(
+        'input[name="ocena"]:checked'
+    );
+
+    if (!imie || !tresc || !wybranaOcena) {
+        alert("Uzupełnij wszystkie pola!");
+        return;
+    }
+
+    const opinie = pobierzOpinie();
+
+    opinie.unshift({
+        imie: imie,
+        tresc: tresc,
+        ocena: Number(wybranaOcena.value)
+    });
+
+    try {
+        localStorage.setItem(KLUCZ_OPINII, JSON.stringify(opinie));
+    } catch {
+        alert("Nie udało się zapisać opinii.");
+        return;
+    }
+
+    formularzOpinii.reset();
+
+    wyswietlOpinie();
+
+    alert("Dziękujemy za dodanie opinii!");
+
+});
+
+wyswietlOpinie();
+</script>
+
+<script>
+
+const pages = [
+    {
+        title: "Strona główna",
+        url: "index.html",
+        keywords: "insolutions subiekt nexo pro firma oprogramowanie"
+    },
+    {
+        title: "Oferta",
+        url: "oferta.html",
+        keywords: "sprzedaż magazyn mobilność integracje produkty"
+    },
+    {
+        title: "Wdrożenia",
+        url: "wdrozenia.html",
+        keywords: "instalacja konfiguracja wdrożenie pomoc"
+    },
+    {
+        title: "Kontakt",
+        url: "kontakt.html",
+        keywords: "telefon email adres kontakt firma"
+    },
+    {
+        title: "Kalkulator",
+        url: "kalkulator.html",
+        keywords: "ceny kalkulator obliczenia koszt"
+    }
+];
+
+const toggle = document.getElementById("search-toggle");
+const box = document.getElementById("search-box");
+const input = document.getElementById("search-input");
+const results = document.getElementById("search-results");
+
+toggle.addEventListener("click", () => {
+    box.classList.toggle("active");
+
+    if (box.classList.contains("active")) {
+        input.focus();
+    }
+});
+
+function normalize(text) {
+    return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+input.addEventListener("input", () => {
+
+    const query = normalize(input.value.trim());
+
+    results.innerHTML = "";
+
+    if (query.length < 2) {
+        return;
+    }
+
+    const found = pages.filter(page => {
+        const text = normalize(
+            page.title + " " + page.keywords
+        );
+
+        return text.includes(query);
+    });
+
+    if (found.length === 0) {
+        results.innerHTML =
+            '<div class="search-empty">Nie znaleziono wyników.</div>';
+        return;
+    }
+
+    found.forEach(page => {
+
+        const link = document.createElement("a");
+
+        link.href = page.url;
+        link.className = "search-result";
+
+        const title = document.createElement("strong");
+        title.textContent = page.title;
+
+        link.appendChild(title);
+        results.appendChild(link);
+
+    });
+
+});
+
+document.addEventListener("click", (event) => {
+
+    if (!event.target.closest(".search-container")) {
+        box.classList.remove("active");
+    }
+
+});
+
+</script>
+
+
+
+
+
+
+
+
 </body>
 </html>

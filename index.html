@@ -106,20 +106,21 @@
 
 
 
-<div class="search-container">
-    <button id="search-toggle" aria-label="Otwórz wyszukiwarkę">
-        🔍
-    </button>
 
-    <div id="search-box">
+<div id="moja-wyszukiwarka">
+    <button type="button" id="moja-lupa">🔍</button>
+
+    <div id="moje-okno-wyszukiwania">
         <input
             type="search"
-            id="search-input"
+            id="moje-pole"
             placeholder="Czego szukasz?"
         >
-        <div id="search-results"></div>
+        <div id="moje-wyniki"></div>
     </div>
 </div>
+
+
 
 
 
@@ -224,6 +225,134 @@
         </div>
 
     </section>
+    
+<section class="stats-section">
+  <h2>Nasze osiągnięcia</h2>
+  <p class="stats-subtitle">
+    Poznaj nasze doświadczenie i możliwości
+  </p>
+
+  <div class="stats-container">
+
+    <div class="stat-box">
+      <div class="stat-number" data-target="230">0</div>
+      
+      <p>ponad 2000 wdrożeń systemów ERP</p>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-number" data-target="300">0</div>
+      <span>+</span>
+      <p>ponad 300 wdrożeń platform e-commerce</p>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-number" data-target="18">0</div>
+      
+<p>lat doświadczenia w tworzeniu innowacyjnych rozwiązań</p>
+    </div>
+
+<div class="stat-box">
+    <div class="stat-number" data-target="160"></div>
+        <p>indywidualnych rozwiązań rozbudowujących możliwości ERP</p>
+
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.stats-section {
+  padding: 70px 20px;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+.stats-section h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.stats-subtitle {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.stat-box {
+  background: white;
+  padding: 35px 25px;
+  border-radius: 15px;
+  min-width: 200px;
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.stat-number,
+.stat-box span {
+  display: inline-block;
+  color: #0a2658;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.stat-box p {
+  font-size: 16px;
+  color: #555;
+  margin-top: 10px;
+}
+
+@media(max-width: 600px) {
+  .stats-container {
+    flex-direction: column;
+  }
+}
+</style>
+
+<script>
+const counters = document.querySelectorAll(".stat-number");
+let started = false;
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !started) {
+      started = true;
+
+      counters.forEach(counter => {
+        const target = Number(counter.dataset.target);
+        const duration = 2000;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+          const progress = Math.min(
+            (currentTime - startTime) / duration, 1
+          );
+
+          counter.textContent = Math.floor(target * progress);
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          }
+        }
+
+        requestAnimationFrame(update);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+observer.observe(document.querySelector(".stats-section"));
+</script>
+
 
     <!-- SUBIEKT NEXO PRO -->
 
@@ -828,10 +957,12 @@
 <div id="accessibility-panel" aria-label="Panel dostępności" role="region" style="position:fixed; top:50%; left:0; transform:translateY(-50%);
   background:#17345b; padding:0.5em; border-radius:0 8px 8px 0; z-index:100000; display:flex; flex-direction:column; gap:0.4em;">
 
-  <button id="btn-sign-language" aria-label="Przełącz tłumaczenie na język migowy" aria-pressed="false" title="Tłumaczenie na język migowy"
-    style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-size:22px; border-radius:4px; display:flex; justify-content:center; align-items:center;">
-    🧏‍♂️
-  </button>
+
+<button id="btn-sign-language"
+        aria-label="Otwórz tłumaczenie na język migowy"
+        style="background:transparent;color:white;border:none;cursor:pointer;width:48px;height:48px;font-size:22px;">
+    🤟
+</button>
 
   <button id="btn-contrast" aria-label="Przełącz tryb wysokiego kontrastu" aria-pressed="false" title="Wysoki kontrast"
     style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-size:22px; border-radius:4px; display:flex; justify-content:center; align-items:center;">
@@ -865,90 +996,134 @@
   </video>
 </div>
 
-<script>
-  const btnSign = document.getElementById('btn-sign-language');
-  const btnContrast = document.getElementById('btn-contrast');
-  const btnZoomIn = document.getElementById('btn-zoom-in');
-  const btnZoomOut = document.getElementById('btn-zoom-out');
-  const btnReset = document.getElementById('btn-reset');
-  const signPanel = document.getElementById('sign-language-panel');
-  const btnCloseSL = document.getElementById('btn-close-sign-language');
 
-  btnSign.addEventListener('click', () => {
-    if (signPanel.style.display === 'block') {
-      signPanel.style.display = 'none';
-      btnSign.setAttribute('aria-pressed', 'false');
-    } else {
-      signPanel.style.display = 'block';
-      btnSign.setAttribute('aria-pressed', 'true');
-      signPanel.focus();
-    }
-  });
 
-  btnCloseSL.addEventListener('click', () => {
-    signPanel.style.display = 'none';
-    btnSign.setAttribute('aria-pressed', 'false');
-    btnSign.focus();
-  });
 
-  btnContrast.addEventListener('click', () => {
-    document.body.classList.toggle('high-contrast');
-    const pressed = document.body.classList.contains('high-contrast');
-    btnContrast.setAttribute('aria-pressed', pressed ? 'true' : 'false');
-  });
 
-  btnZoomIn.addEventListener('click', () => {
-    document.body.classList.add('zoom-in');
-    document.body.classList.remove('zoom-out');
-  });
-
-  btnZoomOut.addEventListener('click', () => {
-    document.body.classList.add('zoom-out');
-    document.body.classList.remove('zoom-in');
-  });
-
-  btnReset.addEventListener('click', () => {
-    document.body.classList.remove('high-contrast', 'zoom-in', 'zoom-out');
-    btnContrast.setAttribute('aria-pressed', 'false');
-  });
-</script>
+<!-- Przycisk powrotu na górę -->
+<button id="backToTop" title="Wróć na górę" aria-label="Wróć na górę">
+  ↑
+</button>
 
 <style>
-  /* Style dla trybów dostępności */
-  body.high-contrast {
-    background-color: black !important;
-    color: yellow !important;
-  }
-  
-  /* Dodanie obsługi wszystkich głównych elementów tekstowych */
-  body.high-contrast p,
-  body.high-contrast h1,
-  body.high-contrast h2,
-  body.high-contrast h3,
-  body.high-contrast h4,
-  body.high-contrast h5,
-  body.high-contrast h6,
-  body.high-contrast li,
-  body.high-contrast span,
-  body.high-contrast a,
-  body.high-contrast button {
-    color: yellow !important;
-  }
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #e5a900;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
 
-  body.high-contrast a:hover,
-  body.high-contrast button:hover {
-    color: #ffea00 !important;
-  }
-
-  body.zoom-in {
-    zoom: 1.2;
-  }
-
-  body.zoom-out {
-    zoom: 0.8;
-  }
+#backToTop:hover {
+  background: #bd8b00;
+  transform: translateY(-5px);
+}
 </style>
 
+<script>
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", function() {
+  if (window.scrollY > 300) {
+    backToTop.style.display = "block";
+  } else {
+    backToTop.style.display = "none";
+  }
+});
+
+backToTop.addEventListener("click", function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+</script>
+
+<script>
+ 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const btnSign = document.getElementById("btn-sign-language");
+    const btnContrast = document.getElementById("btn-contrast");
+    const btnZoomIn = document.getElementById("btn-zoom-in");
+    const btnZoomOut = document.getElementById("btn-zoom-out");
+    const btnReset = document.getElementById("btn-reset");
+    const signPanel = document.getElementById("sign-language-panel");
+    const btnCloseSL = document.getElementById("btn-close-sign-language");
+
+    if (btnSign && signPanel) {
+        btnSign.addEventListener("click", () => {
+            const otwarty = signPanel.style.display === "block";
+            signPanel.style.display = otwarty ? "none" : "block";
+            btnSign.setAttribute("aria-pressed", String(!otwarty));
+
+            if (!otwarty) signPanel.focus();
+        });
+    }
+
+    if (btnCloseSL && signPanel) {
+        btnCloseSL.addEventListener("click", () => {
+            signPanel.style.display = "none";
+
+            if (btnSign) {
+                btnSign.setAttribute("aria-pressed", "false");
+                btnSign.focus();
+            }
+        });
+    }
+
+    if (btnContrast) {
+        btnContrast.addEventListener("click", () => {
+            document.body.classList.toggle("high-contrast");
+
+            btnContrast.setAttribute(
+                "aria-pressed",
+                String(document.body.classList.contains("high-contrast"))
+            );
+        });
+    }
+
+    if (btnZoomIn) {
+        btnZoomIn.addEventListener("click", () => {
+            document.body.classList.add("zoom-in");
+            document.body.classList.remove("zoom-out");
+        });
+    }
+
+    if (btnZoomOut) {
+        btnZoomOut.addEventListener("click", () => {
+            document.body.classList.add("zoom-out");
+            document.body.classList.remove("zoom-in");
+        });
+    }
+
+    if (btnReset) {
+        btnReset.addEventListener("click", () => {
+            document.body.classList.remove(
+                "high-contrast",
+                "zoom-in",
+                "zoom-out"
+            );
+
+            if (btnContrast) {
+                btnContrast.setAttribute("aria-pressed", "false");
+            }
+        });
+    }
+
+});
+</script>
 
 <script>
     
@@ -1330,112 +1505,155 @@ wyswietlOpinie();
 </script>
 
 <script>
+    
+document.addEventListener("DOMContentLoaded", function () {
 
-const pages = [
-    {
-        title: "Strona główna",
-        url: "index.html",
-        keywords: "insolutions subiekt nexo pro firma oprogramowanie"
-    },
-    {
-        title: "Oferta",
-        url: "oferta.html",
-        keywords: "sprzedaż magazyn mobilność integracje produkty"
-    },
-    {
-        title: "Wdrożenia",
-        url: "wdrozenia.html",
-        keywords: "instalacja konfiguracja wdrożenie pomoc"
-    },
-    {
-        title: "Kontakt",
-        url: "kontakt.html",
-        keywords: "telefon email adres kontakt firma"
-    },
-    {
-        title: "Kalkulator",
-        url: "kalkulator.html",
-        keywords: "ceny kalkulator obliczenia koszt"
-    }
-];
+    const przycisk = document.getElementById("moja-lupa");
+    const okno = document.getElementById("moje-okno-wyszukiwania");
+    const pole = document.getElementById("moje-pole");
+    const wyniki = document.getElementById("moje-wyniki");
 
-const toggle = document.getElementById("search-toggle");
-const box = document.getElementById("search-box");
-const input = document.getElementById("search-input");
-const results = document.getElementById("search-results");
+    // Wszystkie podstrony, które ma przeszukiwać wyszukiwarka
+    const strony = [
+        { nazwa: "Strona główna", plik: "index.html" },
+        { nazwa: "Oferta", plik: "oferta.html" },
+        { nazwa: "Wdrożenia", plik: "wdrozenia.html" },
+        { nazwa: "Kontakt", plik: "kontakt.html" },
+        { nazwa: "Kalkulator", plik: "kalkulator.html" }
+    ];
 
-toggle.addEventListener("click", () => {
-    box.classList.toggle("active");
+    let wszystkieStrony = [];
 
-    if (box.classList.contains("active")) {
-        input.focus();
-    }
-});
-
-function normalize(text) {
-    return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-}
-
-input.addEventListener("input", () => {
-
-    const query = normalize(input.value.trim());
-
-    results.innerHTML = "";
-
-    if (query.length < 2) {
-        return;
+    function normalizuj(tekst) {
+        return tekst.toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
     }
 
-    const found = pages.filter(page => {
-        const text = normalize(
-            page.title + " " + page.keywords
+    // Pobieranie treści podstron
+    async function pobierzStrony() {
+
+        const pobrane = await Promise.all(
+            strony.map(async function (strona) {
+
+                try {
+                    const odpowiedz = await fetch(strona.plik);
+
+                    if (!odpowiedz.ok) {
+                        throw new Error("Nie udało się pobrać strony");
+                    }
+
+                    const html = await odpowiedz.text();
+
+                    const dokument = new DOMParser()
+                        .parseFromString(html, "text/html");
+
+                    // Usuwamy elementy, których nie trzeba przeszukiwać
+                    dokument.querySelectorAll(
+                        "script, style, noscript"
+                    ).forEach(el => el.remove());
+
+                    const tresc = dokument.body.innerText
+                        .replace(/\s+/g, " ")
+                        .trim();
+
+                    return {
+                        nazwa: strona.nazwa,
+                        plik: strona.plik,
+                        tresc: tresc
+                    };
+
+                } catch (blad) {
+                    console.error(
+                        "Błąd pobierania:",
+                        strona.plik,
+                        blad
+                    );
+
+                    return null;
+                }
+
+            })
         );
 
-        return text.includes(query);
-    });
-
-    if (found.length === 0) {
-        results.innerHTML =
-            '<div class="search-empty">Nie znaleziono wyników.</div>';
-        return;
+        wszystkieStrony = pobrane.filter(Boolean);
     }
 
-    found.forEach(page => {
+    // Otwieranie i zamykanie wyszukiwarki
+    przycisk.addEventListener("click", function () {
 
-        const link = document.createElement("a");
+        okno.classList.toggle("aktywne");
 
-        link.href = page.url;
-        link.className = "search-result";
-
-        const title = document.createElement("strong");
-        title.textContent = page.title;
-
-        link.appendChild(title);
-        results.appendChild(link);
+        if (okno.classList.contains("aktywne")) {
+            pole.focus();
+        }
 
     });
 
+    // Wyszukiwanie
+    pole.addEventListener("input", function () {
+
+        const zapytanie = normalizuj(pole.value.trim());
+
+        wyniki.replaceChildren();
+
+        if (zapytanie.length < 2) return;
+
+        if (wszystkieStrony.length === 0) {
+            wyniki.textContent = "Ładowanie stron...";
+            return;
+        }
+
+        const znalezione = wszystkieStrony.filter(strona =>
+            normalizuj(strona.tresc).includes(zapytanie)
+        );
+
+        if (znalezione.length === 0) {
+            wyniki.textContent = "Nie znaleziono wyników.";
+            return;
+        }
+
+        znalezione.forEach(strona => {
+
+            const karta = document.createElement("div");
+            karta.className = "wynik-wyszukiwania";
+
+            const link = document.createElement("a");
+            link.href = strona.plik;
+            link.textContent = strona.nazwa;
+
+            const tekst = normalizuj(strona.tresc);
+            const pozycja = tekst.indexOf(zapytanie);
+
+            const poczatek = Math.max(0, pozycja - 55);
+            const koniec = Math.min(
+                strona.tresc.length,
+                pozycja + zapytanie.length + 75
+            );
+
+            const fragment = document.createElement("p");
+            fragment.textContent =
+                "Podstrona: " + strona.plik +
+                " — ..." +
+                strona.tresc.substring(poczatek, koniec) +
+                "...";
+
+            karta.appendChild(link);
+            karta.appendChild(fragment);
+
+            wyniki.appendChild(karta);
+
+        });
+
+    });
+
+    // Wczytanie stron przed wyszukiwaniem
+    pobierzStrony();
+
 });
 
-document.addEventListener("click", (event) => {
 
-    if (!event.target.closest(".search-container")) {
-        box.classList.remove("active");
-    }
-
-});
 
 </script>
-
-
-
-
-
-
-
-
 </body>
 </html>

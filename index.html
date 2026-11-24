@@ -107,18 +107,7 @@
 
 
 
-<div id="moja-wyszukiwarka">
-    <button type="button" id="moja-lupa">🔍</button>
 
-    <div id="moje-okno-wyszukiwania">
-        <input
-            type="search"
-            id="moje-pole"
-            placeholder="Czego szukasz?"
-        >
-        <div id="moje-wyniki"></div>
-    </div>
-</div>
 
 
 
@@ -1644,6 +1633,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+</script>
+<!-- Przycisk powrotu na górę -->
+<button id="backToTop" title="Wróć na górę" aria-label="Wróć na górę">
+  ↑
+</button>
+
+<style>
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #e5a900;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+#backToTop:hover {
+  background: #bd8b00;
+  transform: translateY(-5px);
+}
+</style>
+
+<script>
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", function() {
+  if (window.scrollY > 300) {
+    backToTop.style.display = "block";
+  } else {
+    backToTop.style.display = "none";
+  }
+});
+
+backToTop.addEventListener("click", function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
 </script>
 </body>
 </html>

@@ -1603,3 +1603,34 @@ img.kwadrat {
         bottom: 15px;
     }
 }
+/* POWIĘKSZANIE STRONY */
+body.zoom-in {
+    zoom: 1.2;
+}
+
+/* POMNIEJSZANIE STRONY */
+body.zoom-out {
+    zoom: 0.8;
+}
+
+/* WYSOKI KONTRAST */
+body.high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.high-contrast * {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #ffff00 !important;
+}
+
+body.high-contrast a {
+    color: #ffff00 !important;
+}
+
+body.high-contrast button {
+    background: #000 !important;
+    color: #ffff00 !important;
+    border: 2px solid #ffff00 !important;
+}

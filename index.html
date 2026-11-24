@@ -1059,68 +1059,65 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnZoomIn = document.getElementById("btn-zoom-in");
     const btnZoomOut = document.getElementById("btn-zoom-out");
     const btnReset = document.getElementById("btn-reset");
+
     const signPanel = document.getElementById("sign-language-panel");
     const btnCloseSL = document.getElementById("btn-close-sign-language");
 
-    if (btnSign && signPanel) {
-        btnSign.addEventListener("click", () => {
-            const otwarty = signPanel.style.display === "block";
-            signPanel.style.display = otwarty ? "none" : "block";
-            btnSign.setAttribute("aria-pressed", String(!otwarty));
+    let zoom = 100;
 
-            if (!otwarty) signPanel.focus();
-        });
-    }
+    // POWIĘKSZANIE
+    btnZoomIn.addEventListener("click", () => {
+        zoom = Math.min(zoom + 10, 150);
+        document.body.style.zoom = zoom + "%";
+    });
 
-    if (btnCloseSL && signPanel) {
-        btnCloseSL.addEventListener("click", () => {
-            signPanel.style.display = "none";
+    // POMNIEJSZANIE
+    btnZoomOut.addEventListener("click", () => {
+        zoom = Math.max(zoom - 10, 70);
+        document.body.style.zoom = zoom + "%";
+    });
 
-            if (btnSign) {
-                btnSign.setAttribute("aria-pressed", "false");
-                btnSign.focus();
-            }
-        });
-    }
+    // KONTRAST
+    btnContrast.addEventListener("click", () => {
+        document.body.classList.toggle("high-contrast");
 
-    if (btnContrast) {
-        btnContrast.addEventListener("click", () => {
-            document.body.classList.toggle("high-contrast");
+        btnContrast.setAttribute(
+            "aria-pressed",
+            document.body.classList.contains("high-contrast")
+        );
+    });
 
-            btnContrast.setAttribute(
-                "aria-pressed",
-                String(document.body.classList.contains("high-contrast"))
-            );
-        });
-    }
+    // JĘZYK MIGOWY
+    btnSign.addEventListener("click", () => {
+        const opened = signPanel.style.display === "block";
 
-    if (btnZoomIn) {
-        btnZoomIn.addEventListener("click", () => {
-            document.body.classList.add("zoom-in");
-            document.body.classList.remove("zoom-out");
-        });
-    }
+        signPanel.style.display = opened ? "none" : "block";
 
-    if (btnZoomOut) {
-        btnZoomOut.addEventListener("click", () => {
-            document.body.classList.add("zoom-out");
-            document.body.classList.remove("zoom-in");
-        });
-    }
+        btnSign.setAttribute("aria-pressed", String(!opened));
+    });
 
-    if (btnReset) {
-        btnReset.addEventListener("click", () => {
-            document.body.classList.remove(
-                "high-contrast",
-                "zoom-in",
-                "zoom-out"
-            );
+    // ZAMKNIĘCIE JĘZYKA MIGOWEGO
+    btnCloseSL.addEventListener("click", () => {
+        signPanel.style.display = "none";
+        btnSign.setAttribute("aria-pressed", "false");
+    });
 
-            if (btnContrast) {
-                btnContrast.setAttribute("aria-pressed", "false");
-            }
-        });
-    }
+    // RESET
+    btnReset.addEventListener("click", () => {
+
+        zoom = 100;
+
+        document.body.style.zoom = "100%";
+
+        document.body.classList.remove("high-contrast");
+
+        btnContrast.setAttribute("aria-pressed", "false");
+
+        signPanel.style.display = "none";
+
+        btnSign.setAttribute("aria-pressed", "false");
+
+    });
 
 });
 </script>

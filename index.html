@@ -954,15 +954,14 @@ observer.observe(document.querySelector(".stats-section"));
 
 </footer>
 <!-- Panel dostępności WCAG -->
+<!-- Panel dostępności WCAG -->
 <div id="accessibility-panel" aria-label="Panel dostępności" role="region" style="position:fixed; top:50%; left:0; transform:translateY(-50%);
   background:#17345b; padding:0.5em; border-radius:0 8px 8px 0; z-index:100000; display:flex; flex-direction:column; gap:0.4em;">
 
-
-<button id="btn-sign-language"
-        aria-label="Otwórz tłumaczenie na język migowy"
-        style="background:transparent;color:white;border:none;cursor:pointer;width:48px;height:48px;font-size:22px;">
-    🤟
-</button>
+<button id="btn-sign-language" aria-label="Przełącz tłumaczenie na język migowy" aria-pressed="false" title="Tłumaczenie na język migowy"
+    style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-size:22px; border-radius:4px; display:flex; justify-content:center; align-items:center;">
+    🧏‍♂️
+  </button>
 
   <button id="btn-contrast" aria-label="Przełącz tryb wysokiego kontrastu" aria-pressed="false" title="Wysoki kontrast"
     style="background:transparent; color:white; border:none; cursor:pointer; width:48px; height:48px; font-size:22px; border-radius:4px; display:flex; justify-content:center; align-items:center;">
@@ -996,10 +995,6 @@ observer.observe(document.querySelector(".stats-section"));
   </video>
 </div>
 
-
-
-
-
 <!-- Przycisk powrotu na górę -->
 <button id="backToTop" title="Wróć na górę" aria-label="Wróć na górę">
   ↑
@@ -1031,95 +1026,93 @@ observer.observe(document.querySelector(".stats-section"));
 }
 </style>
 
+
+
 <script>
-const backToTop = document.getElementById("backToTop");
+  const btnSign = document.getElementById('btn-sign-language');
+  const btnContrast = document.getElementById('btn-contrast');
+  const btnZoomIn = document.getElementById('btn-zoom-in');
+  const btnZoomOut = document.getElementById('btn-zoom-out');
+  const btnReset = document.getElementById('btn-reset');
+  const signPanel = document.getElementById('sign-language-panel');
+  const btnCloseSL = document.getElementById('btn-close-sign-language');
 
-window.addEventListener("scroll", function() {
-  if (window.scrollY > 300) {
-    backToTop.style.display = "block";
-  } else {
-    backToTop.style.display = "none";
-  }
-});
-
-backToTop.addEventListener("click", function() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+  btnSign.addEventListener('click', () => {
+    if (signPanel.style.display === 'block') {
+      signPanel.style.display = 'none';
+      btnSign.setAttribute('aria-pressed', 'false');
+    } else {
+      signPanel.style.display = 'block';
+      btnSign.setAttribute('aria-pressed', 'true');
+      signPanel.focus();
+    }
   });
-});
+
+  btnCloseSL.addEventListener('click', () => {
+    signPanel.style.display = 'none';
+    btnSign.setAttribute('aria-pressed', 'false');
+    btnSign.focus();
+  });
+
+  btnContrast.addEventListener('click', () => {
+    document.body.classList.toggle('high-contrast');
+    const pressed = document.body.classList.contains('high-contrast');
+    btnContrast.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+  });
+
+  btnZoomIn.addEventListener('click', () => {
+    document.body.classList.add('zoom-in');
+    document.body.classList.remove('zoom-out');
+  });
+
+  btnZoomOut.addEventListener('click', () => {
+    document.body.classList.add('zoom-out');
+    document.body.classList.remove('zoom-in');
+  });
+
+  btnReset.addEventListener('click', () => {
+    document.body.classList.remove('high-contrast', 'zoom-in', 'zoom-out');
+    btnContrast.setAttribute('aria-pressed', 'false');
+  });
 </script>
 
-<script>
- 
-document.addEventListener("DOMContentLoaded", () => {
+<style>
+  /* Style dla trybów dostępności */
+  body.high-contrast {
+    background-color: black !important;
+    color: yellow !important;
+  }
+  
+  /* Dodanie obsługi wszystkich głównych elementów tekstowych */
+  body.high-contrast p,
+  body.high-contrast h1,
+  body.high-contrast h2,
+  body.high-contrast h3,
+  body.high-contrast h4,
+  body.high-contrast h5,
+  body.high-contrast h6,
+  body.high-contrast li,
+  body.high-contrast span,
+  body.high-contrast a,
+  body.high-contrast button {
+    color: yellow !important;
+  }
 
-    const btnSign = document.getElementById("btn-sign-language");
-    const btnContrast = document.getElementById("btn-contrast");
-    const btnZoomIn = document.getElementById("btn-zoom-in");
-    const btnZoomOut = document.getElementById("btn-zoom-out");
-    const btnReset = document.getElementById("btn-reset");
+  body.high-contrast a:hover,
+  body.high-contrast button:hover {
+    color: #ffea00 !important;
+  }
 
-    const signPanel = document.getElementById("sign-language-panel");
-    const btnCloseSL = document.getElementById("btn-close-sign-language");
+  body.zoom-in {
+    zoom: 1.2;
+  }
 
-    let zoom = 100;
+  body.zoom-out {
+    zoom: 0.8;
+  }
+</style>
 
-    // POWIĘKSZANIE
-    btnZoomIn.addEventListener("click", () => {
-        zoom = Math.min(zoom + 10, 150);
-        document.body.style.zoom = zoom + "%";
-    });
 
-    // POMNIEJSZANIE
-    btnZoomOut.addEventListener("click", () => {
-        zoom = Math.max(zoom - 10, 70);
-        document.body.style.zoom = zoom + "%";
-    });
-
-    // KONTRAST
-    btnContrast.addEventListener("click", () => {
-        document.body.classList.toggle("high-contrast");
-
-        btnContrast.setAttribute(
-            "aria-pressed",
-            document.body.classList.contains("high-contrast")
-        );
-    });
-
-    // JĘZYK MIGOWY
-    btnSign.addEventListener("click", () => {
-        const opened = signPanel.style.display === "block";
-
-        signPanel.style.display = opened ? "none" : "block";
-
-        btnSign.setAttribute("aria-pressed", String(!opened));
-    });
-
-    // ZAMKNIĘCIE JĘZYKA MIGOWEGO
-    btnCloseSL.addEventListener("click", () => {
-        signPanel.style.display = "none";
-        btnSign.setAttribute("aria-pressed", "false");
-    });
-
-    // RESET
-    btnReset.addEventListener("click", () => {
-
-        zoom = 100;
-
-        document.body.style.zoom = "100%";
-
-        document.body.classList.remove("high-contrast");
-
-        btnContrast.setAttribute("aria-pressed", "false");
-
-        signPanel.style.display = "none";
-
-        btnSign.setAttribute("aria-pressed", "false");
-
-    });
-
-});
 </script>
 
 <script>
